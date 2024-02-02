@@ -8,6 +8,6 @@
    <children>
       <Label fx:id="winnerLabel" layoutX="241.0" layoutY="134.0" text="Player 1 Is the Winner!" />
       <Button id="ipad" fx:id="playAgainButton" layoutX="118.0" layoutY="281.0" mnemonicParsing="false" stylesheets="@stylesheet.css" text="Play Again" />
-      <Button id="blue" layoutX="375.0" layoutY="282.0" mnemonicParsing="false" stylesheets="@stylesheet.css" text="Back To Menu" />
+      <Button id="sale" layoutX="375.0" layoutY="282.0" mnemonicParsing="false" stylesheets="@stylesheet.css" text="Back To Menu" />
    </children>
 </AnchorPane>
