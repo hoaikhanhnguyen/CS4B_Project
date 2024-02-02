@@ -10,5 +10,6 @@ public class HelloController {
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Changed the button press text!!!");
+
     }
 }
