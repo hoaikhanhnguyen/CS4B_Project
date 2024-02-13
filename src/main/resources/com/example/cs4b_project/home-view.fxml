@@ -87,8 +87,8 @@
       <children>
             <Pane layoutX="220.0" layoutY="53.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
                <children>
-                  <Button fx:id="startPlayer1Game1" layoutX="54.0" layoutY="88.0" mnemonicParsing="false" onAction="#open1Player" text="2 Player Game" />
-                  <Button fx:id="startPlayer1Game11" layoutX="58.0" layoutY="140.0" mnemonicParsing="false" onAction="#open1Player" text="Online Game" />
+                  <Button fx:id="startPlayer2Game" layoutX="54.0" layoutY="88.0" mnemonicParsing="false" onAction="#open2Player" text="2 Player Game" />
+                  <Button fx:id="startOnlineGame" layoutX="58.0" layoutY="140.0" mnemonicParsing="false" onAction="#openOnlinePlayer" text="Online Game" />
                </children>
             </Pane>
             <Button fx:id="startPlayer1Game" layoutX="274.0" layoutY="89.0" mnemonicParsing="false" onAction="#open1Player" text="1 Player Game" />
