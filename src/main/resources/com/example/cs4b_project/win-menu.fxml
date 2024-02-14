@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="winnerLabel" alignment="CENTER" layoutX="29.0" layoutY="97.0" prefHeight="121.0" prefWidth="461.0" text="Player 1 Is the Winner!" textFill="#ebebeb">
+         <font>
+            <Font name="Calibri" size="36.0" />
+         </font>
+         <effect>
+            <DropShadow />
+         </effect></Label>
+      <BorderPane layoutX="28.0" layoutY="17.0" prefHeight="366.0" prefWidth="461.0" style="-fx-background-color: 000000000000;">
+         <bottom>
+            <Button id="sale" mnemonicParsing="false" prefHeight="74.0" prefWidth="461.0" text="Back To Menu" BorderPane.alignment="CENTER">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="Meiryo" size="18.0" />
+               </font>
+            </Button>
+         </bottom>
+         <top>
+            <Button id="ipad" fx:id="playAgainButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="481.0" text="Play Again" BorderPane.alignment="CENTER">
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <font>
+                  <Font name="Meiryo" size="18.0" />
+               </font>
+            </Button>
+         </top>
+         <center>
+            <Line endX="100.0" startX="-100.0" stroke="#f8f8f8" BorderPane.alignment="CENTER">
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Line>
+         </center>
+      </BorderPane>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="18.0" stroke="BLACK" strokeType="INSIDE" width="516.0" />
+   </children>
+</AnchorPane>
