@@ -38,7 +38,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="NEW GAME" />
+                        <Button fx:id="buttonNewGame" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="NEW GAME" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>

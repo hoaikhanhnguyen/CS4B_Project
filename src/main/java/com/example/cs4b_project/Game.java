@@ -50,6 +50,8 @@ public class Game {
         for (int i = 0 ; i < 9 ; i++) {
             board[i] = 0;
         }
+        winner = 0;
+        turns = 0;
     }
 
     public void dumpBoard() {
