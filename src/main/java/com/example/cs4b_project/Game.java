@@ -4,7 +4,7 @@ import java.util.Arrays;
 public class Game {
     private int[] board;
 
-    private int winner = 0;
+    private int winner, turns = 0;
 
     public Game() {
         board = new int[9];
@@ -31,6 +31,7 @@ public class Game {
     public void setPos(int where, int player) {
         this.board[where] = player;
         checkWin();
+        turns++;
     }
 
     public int getPos(int where) {
@@ -39,6 +40,10 @@ public class Game {
 
     public int getWinner() {
         return winner;
+    }
+
+    public int getTurns() {
+        return turns;
     }
 
     public void reset() {
@@ -54,5 +59,6 @@ public class Game {
         }
         System.out.println();
         System.out.println("Winner = " + this.getWinner());
+        System.out.println("Turns = " + this.getTurns());
     }
 }
