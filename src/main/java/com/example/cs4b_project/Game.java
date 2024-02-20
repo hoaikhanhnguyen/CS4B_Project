@@ -51,6 +51,7 @@ public class Game {
             board[i] = 0;
         }
         winner = 0;
+        turns = 0;
     }
 
     public void dumpBoard() {
