@@ -43,7 +43,6 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="96.0" layoutX="-4.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
-                        <Text layoutX="59.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 1" wrappingWidth="41.7421875" />
                         <Pane layoutX="-2.0" layoutY="53.0" prefHeight="37.0" prefWidth="162.0">
                            <children>
                               <Text layoutX="7.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WINS:" wrappingWidth="41.742187499999886">
@@ -62,6 +61,11 @@
                               </Text>
                            </children>
                         </Pane>
+                        <Label fx:id="playerOneLabel" layoutX="44.0" prefHeight="37.0" prefWidth="95.0" text="Player 1">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </items>
             </SplitPane>
@@ -83,7 +87,6 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="160.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="96.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
-                        <Text layoutX="60.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player 2" />
                         <Pane layoutX="7.0" layoutY="50.0" prefHeight="37.0" prefWidth="162.0">
                            <children>
                               <Text layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WINS:" wrappingWidth="41.742187499999886">
@@ -95,13 +98,18 @@
                                     <Font size="15.0" />
                                  </font>
                               </Text>
-                              <Text fill="#d40505" layoutX="60.0" layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
+                              <Text fill="#d40505" layoutX="62.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
                                  <font>
                                     <Font size="33.0" />
                                  </font>
                               </Text>
                            </children>
                         </Pane>
+                        <Label fx:id="playerTwoLabel" layoutX="44.0" prefHeight="37.0" prefWidth="101.0" text="Player 2">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children></AnchorPane>
               </items>
                <VBox.margin>
