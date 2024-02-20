@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 public class Gameboard {
 
     @FXML
-    public Button button1, button2, button3, button4, button5, button6, button7, button8, button9;
+    public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonNewGame;
     @FXML
     public Button[] boardArray;
 
@@ -33,6 +33,17 @@ public class Gameboard {
 
                 game.dumpBoard();
                 a.consume();
+            });
+
+            // resets board when "New Game" is pressed
+            buttonNewGame.setOnAction((ActionEvent newGame) -> {
+                for (int j = 0; j < 9; j++) {
+                    boardArray[j].setText(" ");
+                    boardArray[j].setDisable(false);
+                    game.reset();
+                    game.dumpBoard();
+                    newGame.consume();
+                }
             });
         }
     }
