@@ -48,6 +48,7 @@ public class Gameboard {
                     boardArray[j].setText(" ");
                     boardArray[j].setDisable(false);
                     game.reset();
+                    turnCount.setText("0");
                     game.dumpBoard();
                     newGame.consume();
                 }
