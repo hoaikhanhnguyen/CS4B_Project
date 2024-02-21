@@ -58,8 +58,12 @@ public class Gameboard {
                 updatePlayerTurnInd(player);
 
                 if (game.isComplete()) {
-                    // previous player won
-                    gameWon(1+(player%2));
+                    if (player != 0) {
+                        // previous player won
+                        gameWon(1 + (player % 2));
+                    } else {
+                        gameWon(0);
+                    }
                 }
 
                 game.dumpBoard();
@@ -142,8 +146,6 @@ public class Gameboard {
             playerTwoLabel.setText("Player 2's Turn!");
             playerTwoLabel.setTextFill(Color.web("#ff2317"));
             playerTwoLabel.setUnderline(true);
-
         }
     }
-
 }

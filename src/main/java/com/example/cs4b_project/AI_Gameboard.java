@@ -46,25 +46,22 @@ public class AI_Gameboard {
                 boardArray[buttonPos].setDisable(true);
 
                 // Set Internal Board
-                game.setPos(buttonPos, player);
+                game.setPos(buttonPos, 1);
 
-                // Update Player
-                player = 1+(player%2);
-
-                ai_move(boardArray, player);
-
-                // Set Internal Board
-                //game.setPos(buttonPos, player);
-
-                // Update turn count
-                updateTurnCount();
-
-                // Update Player Turn Indicator
-                updatePlayerTurnInd(player);
-
+                // Check for win:
                 if (game.isComplete()) {
-                    // previous player won
-                    gameWon(1+(player%2));
+                    gameWon(1);
+                } else {
+                    // Make AI move
+                    ai_move(boardArray, player);
+
+                    // Update turn count
+                    updateTurnCount();
+                    // Update Player Turn Indicator
+
+                    if (game.isComplete()) {
+                        gameWon(2);
+                    }
                 }
 
                 game.dumpBoard();
@@ -166,8 +163,8 @@ public class AI_Gameboard {
 
         boardArray[ai_pos].setText("O");
         boardArray[ai_pos].setDisable(true);
-        System.out.println("Player" + player);
-        game.setPos(ai_pos, player);
+        System.out.println("Player " + 2);
+        game.setPos(ai_pos, 2);
     }
 
 }
