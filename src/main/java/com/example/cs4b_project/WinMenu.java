@@ -8,6 +8,9 @@ public class WinMenu {
     public Label winnerLabel;
     private static final String WINNER_FORMAT = "Player %d is the Winner!";
     public void setWinner(int player) {
-        winnerLabel.setText(String.format(WINNER_FORMAT, player));
+        if (player != 3)
+            winnerLabel.setText(String.format(WINNER_FORMAT, player));
+        else
+            winnerLabel.setText("The game is a Tie!");
     }
 }

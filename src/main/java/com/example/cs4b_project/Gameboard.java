@@ -57,13 +57,12 @@ public class Gameboard {
                 // Update Player Turn Indicator
                 updatePlayerTurnInd(player);
 
-                if (game.isComplete()) {
-                    if (player != 0) {
-                        // previous player won
-                        gameWon(1 + (player % 2));
-                    } else {
-                        gameWon(0);
-                    }
+                if (game.isComplete() == 1) {
+                        gameWon(1);
+                } else if (game.isComplete() == 2) {
+                    gameWon(2);
+                } else if (game.isComplete() == 3) {
+                    gameWon(3);
                 }
 
                 game.dumpBoard();
