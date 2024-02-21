@@ -27,7 +27,7 @@ public class Game {
         if (board[2] != 0 && board[2] == board[4] && board[4] == board[6]) {
             winner = board[2];
         }
-        if (numPlaced == 9)
+        if (numPlaced == 9 && winner == 0)
             winner = 3;
     }
 
