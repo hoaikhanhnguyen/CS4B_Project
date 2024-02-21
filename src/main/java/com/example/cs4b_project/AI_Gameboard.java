@@ -153,7 +153,7 @@ public class AI_Gameboard {
 
         boolean availableCell = false;
         for (int i = 0; i < 9; i++) {
-            if (!boardArray[ai_pos].getText().isEmpty()) {
+            if (boardArray[i].getText().isEmpty()) {
                 availableCell = true;
             }
         }
