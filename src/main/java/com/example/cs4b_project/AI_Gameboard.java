@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import java.util.Random;
 
 import java.io.IOException;
 
@@ -40,12 +41,11 @@ public class AI_Gameboard {
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-                if (player == 1) {
-                    boardArray[buttonPos].setText("X");
-                    boardArray[buttonPos].setDisable(true);
-                } else {
-                    ai_move(boardArray, buttonPos);
-                }
+
+                boardArray[buttonPos].setText("X");
+                boardArray[buttonPos].setDisable(true);
+                ai_move(boardArray, buttonPos);
+
 
                 // Set Internal Board
                 game.setPos(buttonPos, player);
@@ -145,7 +145,9 @@ public class AI_Gameboard {
     }
 
     public void ai_move(Button[] boardArray, int buttonPos) {
-        boardArray[buttonPos].setText("O");
+        Random random = new Random();
+        int ai_pos = random.nextInt(9);
+        boardArray[ai_pos].setText("O");
     }
 
 }
