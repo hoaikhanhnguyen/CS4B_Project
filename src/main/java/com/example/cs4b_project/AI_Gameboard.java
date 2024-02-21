@@ -116,7 +116,7 @@ public class AI_Gameboard {
 
     public void restartGame() {
         for (int j = 0; j < 9; j++) {
-            boardArray[j].setText(" ");
+            boardArray[j].setText("");
             boardArray[j].setDisable(false);
         }
         player = 1;
@@ -150,9 +150,20 @@ public class AI_Gameboard {
     public void ai_move(Button[] boardArray, int player) {
         Random random = new Random();
         int ai_pos = random.nextInt(8);
-        do {
-            ai_pos = random.nextInt(8);
-        }while(boardArray[ai_pos].getText().equals("X"));
+
+        boolean availableCell = false;
+        for (int i = 0; i < 8; i++) {
+            if (!boardArray[ai_pos].getText().isEmpty()) {
+                availableCell = true;
+            }
+        }
+
+        if (availableCell) {
+            do {
+                ai_pos = random.nextInt(8);
+            } while (!boardArray[ai_pos].getText().isEmpty());
+        }
+
         boardArray[ai_pos].setText("O");
         boardArray[ai_pos].setDisable(true);
         System.out.println("Player" + player);
