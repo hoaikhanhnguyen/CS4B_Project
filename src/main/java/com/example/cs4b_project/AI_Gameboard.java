@@ -41,11 +41,16 @@ public class AI_Gameboard {
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-
                 boardArray[buttonPos].setText("X");
                 boardArray[buttonPos].setDisable(true);
-                ai_move(boardArray, buttonPos);
 
+                // Set Internal Board
+                game.setPos(buttonPos, player);
+
+                // Update Player
+                player = 1+(player%2);
+
+                ai_move(boardArray, buttonPos);
 
                 // Set Internal Board
                 game.setPos(buttonPos, player);
@@ -146,8 +151,12 @@ public class AI_Gameboard {
 
     public void ai_move(Button[] boardArray, int buttonPos) {
         Random random = new Random();
-        int ai_pos = random.nextInt(9);
+        int ai_pos = random.nextInt(8);
+        do {
+            ai_pos = random.nextInt(8);
+        }while(boardArray[ai_pos].getText().equals("X"));
         boardArray[ai_pos].setText("O");
+        boardArray[ai_pos].setDisable(true);
     }
 
 }
