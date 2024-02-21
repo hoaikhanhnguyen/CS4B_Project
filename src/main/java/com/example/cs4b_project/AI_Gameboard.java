@@ -54,18 +54,19 @@ public class AI_Gameboard {
                 // Check for win:
                 if (game.isComplete() == 1) {
                     gameWon(1);
-                }
-                // Make AI move
-                ai_move(boardArray, player);
+                } else {
+                    // Make AI move
+                    ai_move(boardArray, player);
 
-                // Update turn count
-                updateTurnCount();
+                    // Update turn count
+                    updateTurnCount();
 
-                if (game.isComplete() == 2) {
-                    gameWon(2);
-                }
-                if (game.isComplete() == 3) {
-                    gameWon(3);
+                    if (game.isComplete() == 2) {
+                        gameWon(2);
+                    }
+                    if (game.isComplete() == 3) {
+                        gameWon(3);
+                    }
                 }
 
                 game.dumpBoard();
