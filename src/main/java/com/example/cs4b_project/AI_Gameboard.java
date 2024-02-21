@@ -53,7 +53,7 @@ public class AI_Gameboard {
 
                 // Check for win:
                 if (game.isComplete()) {
-                    gameWon(1);
+                    gameWon(game.getWinner());
                 } else {
                     // Make AI move
                     ai_move(boardArray, player);
@@ -63,7 +63,7 @@ public class AI_Gameboard {
                     // Update Player Turn Indicator
 
                     if (game.isComplete()) {
-                        gameWon(2);
+                        gameWon(game.getWinner());
                     }
                 }
 
@@ -101,7 +101,11 @@ public class AI_Gameboard {
 
             // Set up WinMenu controller with proper winner
             WinMenu winMenuController = fxmlLoader.getController();
-            winMenuController.setWinner(player);
+            if (player == 0) {
+                winMenuController.setTie();
+            } else {
+                winMenuController.setWinner(player);
+            }
 
             // Set modality to WINDOW_MODAL so that user cannot interact with board
             stage.initModality(Modality.APPLICATION_MODAL);

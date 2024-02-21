@@ -10,4 +10,5 @@ public class WinMenu {
     public void setWinner(int player) {
         winnerLabel.setText(String.format(WINNER_FORMAT, player));
     }
+    public void setTie() {winnerLabel.setText("Tie Game!");}
 }
