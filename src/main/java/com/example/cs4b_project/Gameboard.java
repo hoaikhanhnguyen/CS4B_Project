@@ -39,12 +39,15 @@ public class Gameboard {
         // Set Initial Player Turn Indicator
         updatePlayerTurnInd(player);
 
+        String[] textColors = {"-fx-text-fill: #0831e7;", "-fx-text-fill: #d40505;"};
+
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-                boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
-                boardArray[buttonPos].setStyle("-fx-text-fill: #000000; -fx-font-size: 33px;");
-                boardArray[buttonPos].setDisable(true);
+                  String textColor = textColors[player == 1 ? 0 : 1];
+                  boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
+                  boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 33px;");
+                  boardArray[buttonPos].setDisable(true);
 
                 // Set Internal Board
                 game.setPos(buttonPos, player);
