@@ -3,6 +3,7 @@ import java.util.Arrays;
 
 public class Game {
     private int[] board;
+    private int numPlaced = 0;
 
     private int winner, turns = 0;
 
@@ -28,7 +29,12 @@ public class Game {
         }
     }
 
+    public boolean isComplete() {
+        return numPlaced == 9 || winner != 0;
+    }
+
     public void setPos(int where, int player) {
+        if (this.board[where] == 0) numPlaced++;
         this.board[where] = player;
         checkWin();
         turns++;

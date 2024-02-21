@@ -1,9 +1,17 @@
 package com.example.cs4b_project;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.io.IOException;
+
 public class Gameboard {
 
     @FXML
@@ -43,22 +51,55 @@ public class Gameboard {
                 // Update Player Turn Indicator
                 updatePlayerTurnInd(player);
 
+                if (game.isComplete()) {
+                    // previous player won
+                    gameWon(1+(player%2));
+                }
+
                 game.dumpBoard();
                 a.consume();
             });
 
-            // resets board when "New Game" is pressed
-            buttonNewGame.setOnAction((ActionEvent newGame) -> {
-                for (int j = 0; j < 9; j++) {
-                    boardArray[j].setText(" ");
-                    boardArray[j].setDisable(false);
-                    game.reset();
-                    turnCount.setText("0");
-                    game.dumpBoard();
-                    newGame.consume();
-                }
-            });
         }
+        // resets board when "New Game" is pressed
+        buttonNewGame.setOnAction((ActionEvent newGame) -> {
+            restartGame();
+            newGame.consume();
+        });
+    }
+
+    public void gameWon(int player) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
+
+            // Load stage onto scene
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+
+            // Set up WinMenu controller with proper winner
+            WinMenu winMenuController = fxmlLoader.getController();
+            winMenuController.setWinner(player);
+
+            // Set modality to WINDOW_MODAL so that user cannot interact with board
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            // Show the stage
+            stage.showAndWait();
+        } catch (IOException e) {
+            System.out.println("There was an error opening the win screen.");
+        }
+        restartGame();
+    }
+
+    public void restartGame() {
+        for (int j = 0; j < 9; j++) {
+            boardArray[j].setText(" ");
+            boardArray[j].setDisable(false);
+        }
+        game.reset();
+        turnCount.setText("0");
+        game.dumpBoard();
     }
 
     public void updateTurnCount() {
