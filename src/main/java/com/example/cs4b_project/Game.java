@@ -18,7 +18,7 @@ public class Game {
                 winner = board[i];
             }
             if (board[i*3] != 0 && board[i*3] == board[i*3+1] && board[i*3+1] == board[i*3+2]) {
-                winner = board[i];
+                winner = board[i*3];
             }
         }
         if (board[0] != 0 && board[0] == board[4] && board[4] == board[8]) {
