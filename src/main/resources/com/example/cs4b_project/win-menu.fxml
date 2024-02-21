@@ -1,42 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.InnerShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.WinMenu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.WinMenu">
    <children>
       <Label fx:id="winnerLabel" alignment="CENTER" layoutX="29.0" layoutY="97.0" prefHeight="121.0" prefWidth="461.0" text="Player 1 Is the Winner!" textFill="#ebebeb">
          <font>
-            <Font name="Calibri" size="36.0" />
+            <Font name="Less Perfect DOS VGA" size="36.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Label>
       <BorderPane layoutX="28.0" layoutY="17.0" prefHeight="366.0" prefWidth="461.0" style="-fx-background-color: 000000000000;">
          <bottom>
-            <Button id="sale" mnemonicParsing="false" prefHeight="74.0" prefWidth="461.0" text="Back To Menu" BorderPane.alignment="CENTER">
+            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="461.0" stylesheets="@stylesheet.css" text="Back To Menu" BorderPane.alignment="CENTER">
                <effect>
-                  <InnerShadow />
+                  <DropShadow />
                </effect>
                <font>
-                  <Font name="Meiryo" size="18.0" />
+                  <Font name="Less Perfect DOS VGA" size="30.0" />
                </font>
             </Button>
          </bottom>
          <top>
-            <Button id="ipad" fx:id="playAgainButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="481.0" text="Play Again" BorderPane.alignment="CENTER">
+            <Button fx:id="playAgainButton" mnemonicParsing="false" prefHeight="71.0" prefWidth="481.0" stylesheets="@stylesheet.css" text="Play Again" BorderPane.alignment="CENTER">
                <effect>
-                  <InnerShadow />
+                  <DropShadow />
                </effect>
                <font>
-                  <Font name="Meiryo" size="18.0" />
+                  <Font name="Less Perfect DOS VGA" size="30.0" />
                </font>
             </Button>
          </top>

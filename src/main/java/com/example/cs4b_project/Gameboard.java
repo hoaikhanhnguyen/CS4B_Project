@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -130,12 +131,16 @@ public class Gameboard {
         if (player == 1) {
             playerOneLabel.setText("Player 1's Turn!");
             playerOneLabel.setUnderline(true);
+            playerOneLabel.setTextFill(Color.web("#ff2317"));
             playerTwoLabel.setText("Player 2");
+            playerTwoLabel.setTextFill(Color.web("#000000"));
             playerTwoLabel.setUnderline(false);
         } else {
             playerOneLabel.setText("Player 1");
             playerOneLabel.setUnderline(false);
+            playerOneLabel.setTextFill(Color.web("#000000"));
             playerTwoLabel.setText("Player 2's Turn!");
+            playerTwoLabel.setTextFill(Color.web("#ff2317"));
             playerTwoLabel.setUnderline(true);
 
         }
