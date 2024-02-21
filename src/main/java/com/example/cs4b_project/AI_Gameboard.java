@@ -43,6 +43,7 @@ public class AI_Gameboard {
             boardArray[i].setOnAction((ActionEvent a) -> {
                 player = 1;
                 boardArray[buttonPos].setText("X");
+                boardArray[buttonPos].setStyle("-fx-text-fill: #0831e7; -fx-font-size: 33px;");
                 boardArray[buttonPos].setDisable(true);
 
                 // Update turn count
@@ -166,6 +167,7 @@ public class AI_Gameboard {
 
         boardArray[ai_pos].setText("O");
         boardArray[ai_pos].setDisable(true);
+        boardArray[ai_pos].setStyle("-fx-text-fill: #d40505; -fx-font-size: 33px;");
         System.out.println("Player " + 2);
         game.setPos(ai_pos, 2);
     }
