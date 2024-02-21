@@ -38,7 +38,7 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <Button fx:id="buttonNewGame" layoutY="1.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="NEW GAME" />
+                        <Button fx:id="buttonNewGame" layoutX="32.0" layoutY="35.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="95.0" text="RESET GAME" />
                      </children></AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
@@ -80,10 +80,7 @@
          <children>
             <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <Button layoutX="130.0" mnemonicParsing="false" text="| |" />
-                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="160.0">
                      <children>
                         <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="96.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
