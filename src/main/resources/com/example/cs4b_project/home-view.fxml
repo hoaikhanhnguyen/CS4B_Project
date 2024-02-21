@@ -109,7 +109,7 @@
 
                </children>
             </Pane>
-            <Text layoutX="190.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Tic-Tac-Toe!" wrappingWidth="274.521484375">
+          <Text layoutX="119.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Tic-Tac-Toe!" textAlignment="CENTER" wrappingWidth="436.521484375">
 
                <font>
                   <Font name="Yu Gothic UI Regular" size="36.0" />
