@@ -49,15 +49,4 @@ public class Controller {
         stage.show();
     }
 
-    @FXML
-    protected void closeWinMenu() throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load());
-//        Stage stage = new Stage();
-//        stage.setScene(scene);
-//        stage.show();
-        Stage stage = (Stage) playAgainButton.getScene().getWindow();
-        //stage.close();
-    }
-
 }
