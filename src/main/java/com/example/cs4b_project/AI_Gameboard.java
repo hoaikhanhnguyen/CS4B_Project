@@ -52,19 +52,20 @@ public class AI_Gameboard {
                 game.setPos(buttonPos, 1);
 
                 // Check for win:
-                if (game.isComplete()) {
+                if (game.isComplete() == 1) {
                     gameWon(1);
-                } else {
-                    // Make AI move
-                    ai_move(boardArray, player);
+                }
+                // Make AI move
+                ai_move(boardArray, player);
 
-                    // Update turn count
-                    updateTurnCount();
-                    // Update Player Turn Indicator
+                // Update turn count
+                updateTurnCount();
 
-                    if (game.isComplete()) {
-                        gameWon(2);
-                    }
+                if (game.isComplete() == 2) {
+                    gameWon(2);
+                }
+                if (game.isComplete() == 3) {
+                    gameWon(3);
                 }
 
                 game.dumpBoard();
