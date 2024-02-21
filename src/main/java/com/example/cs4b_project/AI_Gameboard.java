@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.util.Random;
@@ -139,6 +140,7 @@ public class AI_Gameboard {
         if (player == 1) {
             playerOneLabel.setText("Player 1's Turn!");
             playerOneLabel.setUnderline(true);
+            playerOneLabel.setTextFill(Color.web("#00ff15"));
             playerTwoLabel.setText("Player 2");
             playerTwoLabel.setUnderline(false);
         } else {
@@ -146,6 +148,7 @@ public class AI_Gameboard {
             playerOneLabel.setUnderline(false);
             playerTwoLabel.setText("Player 2's Turn!");
             playerTwoLabel.setUnderline(true);
+            playerTwoLabel.setTextFill(Color.web("#00ff15"));
 
         }
     }

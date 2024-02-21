@@ -43,6 +43,7 @@ public class Gameboard {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
                 boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
+                boardArray[buttonPos].setStyle("-fx-text-fill: #000000; -fx-font-size: 33px;");
                 boardArray[buttonPos].setDisable(true);
 
                 // Set Internal Board
@@ -134,7 +135,7 @@ public class Gameboard {
         if (player == 1) {
             playerOneLabel.setText("Player 1's Turn!");
             playerOneLabel.setUnderline(true);
-            playerOneLabel.setTextFill(Color.web("#ff2317"));
+            playerOneLabel.setTextFill(Color.web("#00ff15"));
             playerTwoLabel.setText("Player 2");
             playerTwoLabel.setTextFill(Color.web("#000000"));
             playerTwoLabel.setUnderline(false);
@@ -143,7 +144,7 @@ public class Gameboard {
             playerOneLabel.setUnderline(false);
             playerOneLabel.setTextFill(Color.web("#000000"));
             playerTwoLabel.setText("Player 2's Turn!");
-            playerTwoLabel.setTextFill(Color.web("#ff2317"));
+            playerTwoLabel.setTextFill(Color.web("#00ff15"));
             playerTwoLabel.setUnderline(true);
         }
     }
