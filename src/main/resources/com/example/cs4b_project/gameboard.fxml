@@ -49,16 +49,12 @@
                                  <font>
                                     <Font size="11.0" />
                                  </font></Text>
-                              <Text layoutX="39.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Text>
                               <Text fill="#0831e7" layoutX="71.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
                                  <font>
                                     <Font size="33.0" />
                                  </font>
                               </Text>
+                              <Label fx:id="playerOneWinCount" layoutX="38.0" layoutY="24.0" text="0" />
                            </children>
                         </Pane>
                         <Label fx:id="playerOneLabel" layoutX="44.0" prefHeight="37.0" prefWidth="95.0" text="Player 1">
@@ -90,16 +86,12 @@
                                  <font>
                                     <Font size="11.0" />
                                  </font></Text>
-                              <Text layoutX="33.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Text>
                               <Text fill="#d40505" layoutX="62.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
                                  <font>
                                     <Font size="33.0" />
                                  </font>
                               </Text>
+                              <Label fx:id="playerTwoWinCount" layoutX="31.0" layoutY="29.0" text="0" />
                            </children>
                         </Pane>
                         <Label fx:id="playerTwoLabel" layoutX="44.0" prefHeight="37.0" prefWidth="101.0" text="Player 2">

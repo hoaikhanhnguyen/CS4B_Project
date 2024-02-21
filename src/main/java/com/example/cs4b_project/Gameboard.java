@@ -16,11 +16,16 @@ public class Gameboard {
 
     @FXML
     public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonNewGame;
+    @FXML
     public Label turnCount, playerOneLabel, playerTwoLabel;
+    @FXML
+    public Label playerOneWinCount, playerTwoWinCount;
     @FXML
     public Button[] boardArray;
 
     public Game game;
+    public int playerOneWins = 0;
+    public int playerTwoWins = 0;
     public int player = 1;
 
     public void initialize() {
@@ -69,9 +74,20 @@ public class Gameboard {
     }
 
     public void gameWon(int player) {
+
+        if (player != 0) {
+            if (player == 1) {
+                playerOneWins++;
+                playerOneWinCount.setText(Integer.toString(playerOneWins));
+            }
+            if (player == 2) {
+                playerTwoWins++;
+                playerTwoWinCount.setText(Integer.toString(playerTwoWins));
+            }
+        }
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
-
             // Load stage onto scene
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
