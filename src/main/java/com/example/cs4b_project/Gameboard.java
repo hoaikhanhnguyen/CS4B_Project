@@ -97,6 +97,8 @@ public class Gameboard {
             boardArray[j].setText(" ");
             boardArray[j].setDisable(false);
         }
+        player = 1;
+        updatePlayerTurnInd(player);
         game.reset();
         turnCount.setText("0");
         game.dumpBoard();
