@@ -27,10 +27,12 @@ public class Game {
         if (board[2] != 0 && board[2] == board[4] && board[4] == board[6]) {
             winner = board[2];
         }
+        if (numPlaced == 9)
+            winner = 3;
     }
 
-    public boolean isComplete() {
-        return numPlaced == 9 || winner != 0;
+    public int isComplete() {
+        return winner;
     }
 
     public void setPos(int where, int player) {
