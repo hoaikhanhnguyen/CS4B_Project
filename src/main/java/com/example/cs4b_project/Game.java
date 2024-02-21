@@ -58,6 +58,7 @@ public class Game {
         }
         winner = 0;
         turns = 0;
+        numPlaced = 0;
     }
 
     public void dumpBoard() {
