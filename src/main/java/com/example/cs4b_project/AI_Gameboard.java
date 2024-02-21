@@ -45,6 +45,9 @@ public class AI_Gameboard {
                 boardArray[buttonPos].setText("X");
                 boardArray[buttonPos].setDisable(true);
 
+                // Update turn count
+                updateTurnCount();
+
                 // Set Internal Board
                 game.setPos(buttonPos, 1);
 
