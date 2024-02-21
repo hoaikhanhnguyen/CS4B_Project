@@ -40,8 +40,12 @@ public class AI_Gameboard {
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-                boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
-                boardArray[buttonPos].setDisable(true);
+                if (player == 1) {
+                    boardArray[buttonPos].setText("X");
+                    boardArray[buttonPos].setDisable(true);
+                } else {
+                    ai_move();
+                }
 
                 // Set Internal Board
                 game.setPos(buttonPos, player);
@@ -138,6 +142,10 @@ public class AI_Gameboard {
             playerTwoLabel.setUnderline(true);
 
         }
+    }
+
+    public void ai_move() {
+        //boardArray[buttonPos].setText("O");
     }
 
 }
