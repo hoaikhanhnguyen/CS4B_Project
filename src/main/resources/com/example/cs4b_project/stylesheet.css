@@ -496,3 +496,19 @@
     -fx-font-size: 14px;
     -fx-padding: 10 20 10 20;
 }
+
+/*--------------------------------------------------------------------------------------------------------------------------*/
+.button{
+    -fx-background-color: #43c6fa;
+    -fx-background-radius: 2 2 2 2;
+}
+.button:hover {
+    -fx-background-color:lime;
+    -fx-background-radius:0;
+    -fx-border-color:black;
+    -fx-border-width: 0 3 3 0;
+    -fx-background-insets: 0;
+}
+.highlight{
+    -fx-background-color: yellow;
+}
