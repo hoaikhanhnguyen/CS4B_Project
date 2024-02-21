@@ -168,13 +168,13 @@ public class AI_Gameboard {
             do {
                 ai_pos = random.nextInt(9);
             } while (!boardArray[ai_pos].getText().isEmpty());
-        }
 
-        boardArray[ai_pos].setText("O");
-        boardArray[ai_pos].setDisable(true);
-        boardArray[ai_pos].setStyle("-fx-text-fill: #d40505; -fx-font-size: 33px;");
-        System.out.println("Player " + 2);
-        game.setPos(ai_pos, 2);
+            boardArray[ai_pos].setText("O");
+            boardArray[ai_pos].setDisable(true);
+            boardArray[ai_pos].setStyle("-fx-text-fill: #d40505; -fx-font-size: 33px;");
+            System.out.println("Player " + 2);
+            game.setPos(ai_pos, 2);
+        }
     }
 
 }
