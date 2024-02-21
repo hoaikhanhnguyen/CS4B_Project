@@ -44,7 +44,7 @@ public class AI_Gameboard {
                     boardArray[buttonPos].setText("X");
                     boardArray[buttonPos].setDisable(true);
                 } else {
-                    ai_move();
+                    ai_move(boardArray, buttonPos);
                 }
 
                 // Set Internal Board
@@ -144,8 +144,8 @@ public class AI_Gameboard {
         }
     }
 
-    public void ai_move() {
-        //boardArray[buttonPos].setText("O");
+    public void ai_move(Button[] boardArray, int buttonPos) {
+        boardArray[buttonPos].setText("O");
     }
 
 }
