@@ -146,10 +146,10 @@ public class AI_Gameboard {
 
     public void ai_move(Button[] boardArray, int player) {
         Random random = new Random();
-        int ai_pos = random.nextInt(8);
+        int ai_pos = random.nextInt(9);
 
         boolean availableCell = false;
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             if (!boardArray[ai_pos].getText().isEmpty()) {
                 availableCell = true;
             }
@@ -157,7 +157,7 @@ public class AI_Gameboard {
 
         if (availableCell) {
             do {
-                ai_pos = random.nextInt(8);
+                ai_pos = random.nextInt(9);
             } while (!boardArray[ai_pos].getText().isEmpty());
         }
 

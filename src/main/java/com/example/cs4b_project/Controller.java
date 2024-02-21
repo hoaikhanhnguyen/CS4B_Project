@@ -22,7 +22,8 @@ public class Controller {
 
     @FXML
     protected void open1Player() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("ai_gameboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard.fxml"));
+        fxmlLoader.setController(new AI_Gameboard());
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -32,6 +33,7 @@ public class Controller {
     @FXML
     protected void open2Player() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard.fxml"));
+        fxmlLoader.setController(new Gameboard());
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
