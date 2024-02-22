@@ -1,19 +1,19 @@
 package com.example.cs4b_project;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import java.util.Random;
 
 import java.io.IOException;
 
-public class Gameboard {
+public class AI_Gameboard {
 
     @FXML
     public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonNewGame;
@@ -39,34 +39,36 @@ public class Gameboard {
         // Set Initial Player Turn Indicator
         updatePlayerTurnInd(player);
 
-        String[] textColors = {"-fx-text-fill: #0831e7;", "-fx-text-fill: #d40505;"};
-
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-                  String textColor = textColors[player == 1 ? 0 : 1];
-                  boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
-                  boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
-                  boardArray[buttonPos].setDisable(true);
-
-                // Set Internal Board
-                game.setPos(buttonPos, player);
-
-                // Update Player
-                player = 1+(player%2);
+                player = 1;
+                boardArray[buttonPos].setText("X");
+                boardArray[buttonPos].setStyle("-fx-text-fill: #0831e7; -fx-font-size: 28px;");
+                boardArray[buttonPos].setDisable(true);
 
                 // Update turn count
                 updateTurnCount();
 
-                // Update Player Turn Indicator
-                updatePlayerTurnInd(player);
+                // Set Internal Board
+                game.setPos(buttonPos, 1);
 
+                // Check for win:
                 if (game.isComplete() == 1) {
-                        gameWon(1);
-                } else if (game.isComplete() == 2) {
-                    gameWon(2);
-                } else if (game.isComplete() == 3) {
-                    gameWon(3);
+                    gameWon(1);
+                } else {
+                    // Make AI move
+                    ai_move(boardArray, player);
+
+                    // Update turn count
+                    updateTurnCount();
+
+                    if (game.isComplete() == 2) {
+                        gameWon(2);
+                    }
+                    if (game.isComplete() == 3) {
+                        gameWon(3);
+                    }
                 }
 
                 game.dumpBoard();
@@ -118,7 +120,7 @@ public class Gameboard {
 
     public void restartGame() {
         for (int j = 0; j < 9; j++) {
-            boardArray[j].setText(" ");
+            boardArray[j].setText("");
             boardArray[j].setDisable(false);
         }
         player = 1;
@@ -140,15 +142,39 @@ public class Gameboard {
             playerOneLabel.setUnderline(true);
             playerOneLabel.setTextFill(Color.web("#00ff15"));
             playerTwoLabel.setText("Player 2");
-            playerTwoLabel.setTextFill(Color.web("#000000"));
             playerTwoLabel.setUnderline(false);
         } else {
             playerOneLabel.setText("Player 1");
             playerOneLabel.setUnderline(false);
-            playerOneLabel.setTextFill(Color.web("#000000"));
             playerTwoLabel.setText("Player 2's Turn!");
-            playerTwoLabel.setTextFill(Color.web("#00ff15"));
             playerTwoLabel.setUnderline(true);
+            playerTwoLabel.setTextFill(Color.web("#00ff15"));
+
         }
     }
+
+    public void ai_move(Button[] boardArray, int player) {
+        Random random = new Random();
+        int ai_pos = random.nextInt(9);
+
+        boolean availableCell = false;
+        for (int i = 0; i < 9; i++) {
+            if (boardArray[i].getText().isEmpty()) {
+                availableCell = true;
+            }
+        }
+
+        if (availableCell) {
+            do {
+                ai_pos = random.nextInt(9);
+            } while (!boardArray[ai_pos].getText().isEmpty());
+
+            boardArray[ai_pos].setText("O");
+            boardArray[ai_pos].setDisable(true);
+            boardArray[ai_pos].setStyle("-fx-text-fill: #d40505; -fx-font-size: 28px;");
+            System.out.println("Player " + 2);
+            game.setPos(ai_pos, 2);
+        }
+    }
+
 }
