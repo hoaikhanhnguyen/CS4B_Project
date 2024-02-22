@@ -46,7 +46,7 @@ public class Gameboard {
             boardArray[i].setOnAction((ActionEvent a) -> {
                   String textColor = textColors[player == 1 ? 0 : 1];
                   boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
-                  boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 33px;");
+                  boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
                   boardArray[buttonPos].setDisable(true);
 
                 // Set Internal Board
