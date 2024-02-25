@@ -111,6 +111,7 @@ public class AI_Gameboard extends Gameboard {
         } catch (IOException e) {
             System.out.println("There was an error opening the win screen.");
         }
+        restartGame();
     }
 
     public void ai_move(Button[] boardArray, int player) {
