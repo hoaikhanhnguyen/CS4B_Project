@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.WinMenu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.WinMenu">
    <children>
-      <Label fx:id="winnerLabel" alignment="CENTER" layoutX="29.0" layoutY="97.0" prefHeight="121.0" prefWidth="461.0" text="Player 1 Is the Winner!" textFill="#ebebeb">
+      <Label fx:id="winnerLabel" alignment="CENTER" layoutX="28.0" layoutY="66.0" prefHeight="121.0" prefWidth="461.0" text="Player 1 Is the Winner!" textFill="#ebebeb">
          <font>
-            <Font name="Less Perfect DOS VGA" size="36.0" />
+            <Font name="Less Perfect DOS VGA" size="37.0" />
          </font>
          <effect>
             <DropShadow />
          </effect></Label>
-      <BorderPane layoutX="28.0" layoutY="17.0" prefHeight="366.0" prefWidth="461.0" style="-fx-background-color: 000000000000;">
-         <center>
-            <Line endX="100.0" startX="-100.0" stroke="#f8f8f8" BorderPane.alignment="CENTER">
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Line>
-         </center>
-      </BorderPane>
+      <Line endX="100.0" layoutX="258.0" layoutY="157.0" startX="-100.0" stroke="#f8f8f8">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Line>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="18.0" stroke="BLACK" strokeType="INSIDE" width="516.0" />
+      <Button fx:id="playAgain" layoutX="72.0" layoutY="211.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Play Again">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
+      <Button fx:id="exitB" layoutX="273.0" layoutY="211.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Exit">
+         <effect>
+            <DropShadow />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

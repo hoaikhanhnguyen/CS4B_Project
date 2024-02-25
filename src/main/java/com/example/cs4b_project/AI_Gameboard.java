@@ -1,34 +1,18 @@
 package com.example.cs4b_project;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.util.Random;
 
 import java.io.IOException;
 
-public class AI_Gameboard {
+public class AI_Gameboard extends Gameboard {
 
-    @FXML
-    public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonNewGame;
-    @FXML
-    public Label turnCount, playerOneLabel, playerTwoLabel;
-    @FXML
-    public Label playerOneWinCount, playerTwoWinCount;
-    @FXML
-    public Button[] boardArray;
-
-    public Game game;
-    public int playerOneWins = 0;
-    public int playerTwoWins = 0;
-    public int player = 1;
-
+    @Override
     public void initialize() {
         boardArray =
             new Button[]{button1, button2, button3,
@@ -42,13 +26,18 @@ public class AI_Gameboard {
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-                player = 1;
                 boardArray[buttonPos].setText("X");
                 boardArray[buttonPos].setStyle("-fx-text-fill: #0831e7; -fx-font-size: 28px;");
                 boardArray[buttonPos].setDisable(true);
 
+                // Update Player
+                player = 1+(player%2);
+
                 // Update turn count
                 updateTurnCount();
+
+                // Update Player Turn Indicator
+                updatePlayerTurnInd(player);
 
                 // Set Internal Board
                 game.setPos(buttonPos, 1);
@@ -107,49 +96,20 @@ public class AI_Gameboard {
             WinMenu winMenuController = fxmlLoader.getController();
             winMenuController.setWinner(player);
 
+            // Passes the current scene to the win screen logic
+            winMenuController.setPrvScene(buttonNewGame.getScene());
+
             // Set modality to WINDOW_MODAL so that user cannot interact with board
             stage.initModality(Modality.APPLICATION_MODAL);
 
+            // closes the current window before opening the win screen
+            Stage curStage = (Stage)buttonNewGame.getScene().getWindow();
+
             // Show the stage
             stage.showAndWait();
+            curStage.close();
         } catch (IOException e) {
             System.out.println("There was an error opening the win screen.");
-        }
-        restartGame();
-    }
-
-    public void restartGame() {
-        for (int j = 0; j < 9; j++) {
-            boardArray[j].setText("");
-            boardArray[j].setDisable(false);
-        }
-        player = 1;
-        updatePlayerTurnInd(player);
-        game.reset();
-        turnCount.setText("0");
-        game.dumpBoard();
-    }
-
-    public void updateTurnCount() {
-        int turns = Integer.parseInt(turnCount.getText());
-        turns++;
-        turnCount.setText(Integer.toString(turns));
-    }
-
-    public void updatePlayerTurnInd(int player) {
-        if (player == 1) {
-            playerOneLabel.setText("Player 1's Turn!");
-            playerOneLabel.setUnderline(true);
-            playerOneLabel.setTextFill(Color.web("#00ff15"));
-            playerTwoLabel.setText("Player 2");
-            playerTwoLabel.setUnderline(false);
-        } else {
-            playerOneLabel.setText("Player 1");
-            playerOneLabel.setUnderline(false);
-            playerTwoLabel.setText("Player 2's Turn!");
-            playerTwoLabel.setUnderline(true);
-            playerTwoLabel.setTextFill(Color.web("#00ff15"));
-
         }
     }
 
@@ -160,6 +120,7 @@ public class AI_Gameboard {
         boolean availableCell = false;
         for (int i = 0; i < 9; i++) {
             if (boardArray[i].getText().isEmpty()) {
+                System.out.println("availabe");
                 availableCell = true;
             }
         }
