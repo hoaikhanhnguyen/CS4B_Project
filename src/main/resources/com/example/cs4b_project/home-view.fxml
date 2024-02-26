@@ -40,14 +40,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.Controller">
   <children>
-    <MenuBar VBox.vgrow="NEVER">
+    <MenuBar stylesheets="@Dark.css" VBox.vgrow="NEVER">
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
@@ -86,11 +85,11 @@
         </Menu>
       </menus>
     </MenuBar>
-    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="background" stylesheets="@Dark.css" VBox.vgrow="ALWAYS">
       <children>
             <Pane layoutX="226.0" layoutY="75.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #EEEEEE;">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="238.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="238.0" stroke="BLACK" strokeType="INSIDE" styleClass="filler" width="200.0" />
                   <Button fx:id="startPlayer1Game" layoutX="38.0" layoutY="28.0" mnemonicParsing="false" onAction="#open1Player" prefHeight="43.0" prefWidth="125.0" stylesheets="@stylesheet.css" text="1 Player Game">
                      <font>
                         <Font name="Less Perfect DOS VGA" size="14.0" />
@@ -109,7 +108,7 @@
 
                </children>
             </Pane>
-          <Text layoutX="119.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Tic-Tac-Toe!" textAlignment="CENTER" wrappingWidth="436.521484375">
+          <Text fill="#f2f2f2" layoutX="76.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="label-header" text="Welcome to Tic-Tac-Toe!" textAlignment="CENTER" wrappingWidth="488.521484375">
 
                <font>
                   <Font name="Yu Gothic UI Regular" size="36.0" />
