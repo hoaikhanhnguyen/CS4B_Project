@@ -118,7 +118,7 @@ public class Gameboard {
 
     public void restartGame() {
         for (int j = 0; j < 9; j++) {
-            boardArray[j].setText(" ");
+            boardArray[j].setText("");              // this allows for an isEmpty() check
             boardArray[j].setDisable(false);
         }
         player = 1;
