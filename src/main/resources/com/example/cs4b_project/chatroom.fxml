@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.Chatroom">
+   <children>
+      <VBox fx:id="container" layoutX="12.0" layoutY="63.0" prefHeight="274.0" prefWidth="583.0" />
+      <ToolBar layoutX="10.0" layoutY="14.0" prefHeight="40.0" prefWidth="583.0">
+        <items>
+          <Button mnemonicParsing="false" text="connect" />
+          <AnchorPane minHeight="0.0" minWidth="150.0" prefHeight="28.0" prefWidth="152.0">
+               <children>
+                  <Label layoutX="2.0" layoutY="5.0" prefHeight="18.0" prefWidth="25.0" text="IP: " />
+                  <TextField fx:id="textIp" layoutX="27.0" layoutY="1.0" prefHeight="26.0" prefWidth="120.0" text="999.999.999" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="125.0" prefHeight="21.0" prefWidth="63.0">
+               <children>
+                  <Label layoutY="5.0" text="PORT:" />
+                  <TextField fx:id="textPort" layoutX="43.0" layoutY="1.0" prefHeight="26.0" prefWidth="82.0" text="1234" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </AnchorPane>
+        </items>
+      </ToolBar>
+      <ToolBar layoutX="54.0" layoutY="347.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="47.0" prefWidth="500.0">
+        <items>
+            <Label prefHeight="18.0" prefWidth="56.0" text="Input:">
+               <font>
+                  <Font name="Cantarell Extra Bold" size="14.0" />
+               </font>
+            </Label>
+            <AnchorPane prefHeight="18.0" prefWidth="323.0">
+               <children>
+                  <TextArea fx:id="textInput" layoutX="4.0" layoutY="3.0" prefHeight="40.0" prefWidth="315.0" text="Sally sells seashells on a seashore But the value of these shells will fall Due to the laws of supply and demand No one wants to buy shells 'cause there's loads on the sand " wrapText="true" />
+               </children></AnchorPane>
+          <Button mnemonicParsing="false" onAction="#sendButton" prefHeight="28.0" prefWidth="91.0" text="send" />
+        </items>
+      </ToolBar>
+      <Button layoutX="498.0" layoutY="18.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="30.0" prefWidth="91.0" text="exit" />
+   </children>
+</AnchorPane>
