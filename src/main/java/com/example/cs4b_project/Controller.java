@@ -42,7 +42,7 @@ public class Controller {
 
     @FXML
     protected void openOnlinePlayer() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("chatroom.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
