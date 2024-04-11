@@ -106,7 +106,10 @@
                <font>
                   <Font name="Yu Gothic UI Regular" size="36.0" />
                </font></Text>
-            <Button layoutX="590.0" layoutY="333.0" mnemonicParsing="false" onAction="#closeWindow" stylesheets="@stylesheet.css" text="kill" />
+            <Button layoutX="582.0" layoutY="335.0" mnemonicParsing="false" onAction="#closeWindow" stylesheets="@stylesheet.css" text="kill">
+               <font>
+                  <Font name="Less Perfect DOS VGA" size="13.0" />
+               </font></Button>
       </children>
     </AnchorPane>
   </children>

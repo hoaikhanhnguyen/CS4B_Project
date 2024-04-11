@@ -14,9 +14,9 @@ public class ClientHandler implements Runnable{
     private Socket socket;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private String clientUserName;
+    public String clientUserName;
 
-    ClientHandler(Socket socket) {
+    public ClientHandler(Socket socket, String usr) {
         try {
             this.socket = socket;
 
@@ -26,11 +26,12 @@ public class ClientHandler implements Runnable{
             // Then wrap char stream with buffered writer
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             this.bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            this.clientUserName = bufferedReader.readLine(); // get client username when connecting
+            //this.clientUserName = bufferedReader.readLine(); // get client username when connecting
+            this.clientUserName = usr;
             clientHandlers.add(this);
-            broadcastMessage("SERVER:" + clientUserName + " has entered the chat.");
+            broadcastMessage( clientUserName + " has entered the chat.");
         } catch(IOException e) {
-            closeEverything(socket, bufferedReader, bufferedWriter);
+            closeEverything();
         }
     }
 
@@ -43,7 +44,7 @@ public class ClientHandler implements Runnable{
                 messageFromClient = bufferedReader.readLine();
                 broadcastMessage(messageFromClient);
             } catch (IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
+                closeEverything();
                 break;
             }
         }
@@ -55,12 +56,13 @@ public class ClientHandler implements Runnable{
             try {
                 if (!clientHandler.clientUserName.equals(clientUserName)) {
                     clientHandler.bufferedWriter.write(messageToSend);
+                    ChatClient.setSender(clientUserName);                   //sends the client user to chatclient for printing of the username [ username: hi]
                     //explicitly send newline
                     clientHandler.bufferedWriter.newLine();
                     clientHandler.bufferedWriter.flush();
                 }
             } catch(IOException e) {
-                closeEverything(socket, bufferedReader, bufferedWriter);
+                closeEverything();
             }
         }
     }
@@ -68,21 +70,24 @@ public class ClientHandler implements Runnable{
     // when client leaves chat
     public void removeClientHandler() {
         clientHandlers.remove(this);
-        broadcastMessage("SERVER:" + clientUserName + " has left the chat.");
+        broadcastMessage(clientUserName + " has left the chat.");
     }
 
-    public void closeEverything(Socket socket, BufferedReader bufferedReader, BufferedWriter bufferedWriter) {
+    public synchronized void closeEverything() {
         removeClientHandler();
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
             }
+            System.out.println("closed reader");
             if (bufferedWriter != null) {
                 bufferedWriter.close();
             }
+            System.out.println("closed writer");
             if (socket != null) {
                 socket.close();
             }
+            System.out.println("closed socket");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
