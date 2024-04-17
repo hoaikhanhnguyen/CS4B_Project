@@ -60,9 +60,9 @@ public class Chatroom {
     public void sendButton(ActionEvent actionEvent) {
         message = textInput.getText();                          //stores text in textarea as message [usr input]
         textInput.setText("");
-        if(!message.isEmpty()) {
-            makeLabel(message);
-        }
+//        if(!message.isEmpty()) {
+//            makeLabel(message);
+//        }
         client.sendMessage(message);
     }
 
@@ -73,13 +73,9 @@ public class Chatroom {
     }
     public void closeWindow(ActionEvent actionEvent) {
         ((Stage)(((Button)actionEvent.getSource()).getScene().getWindow())).close();        //closes the ui window silently
-        Main.clients--;
-        if(Main.clients <= -1)
-            Main.clients = 0;          //tracks # of clients
-
 
         //------------------------------------------------------
-//        this.client.closeEverything();  //HAS THREADING ISSUES
+        this.client.closeEverything();  //HAS THREADING ISSUES
         //------------------------------------------------------
     }
 }

@@ -29,7 +29,17 @@ public class ClientHandler implements Runnable{
             //this.clientUserName = bufferedReader.readLine(); // get client username when connecting
             this.clientUserName = usr;
             clientHandlers.add(this);
-            broadcastMessage( clientUserName + " has entered the chat.");
+
+            try {
+                bufferedWriter.write("SERVERNAME:" + usr);
+                bufferedWriter.newLine();
+                bufferedWriter.flush();
+            } catch (IOException e) {
+                System.out.println("ERROR: Sending ClientHandler username back to ChatClient fails.");
+                e.printStackTrace();
+            }
+
+            broadcastMessage(" (SERVER) " + clientUserName + " has entered the chat.");
         } catch(IOException e) {
             closeEverything();
         }
@@ -42,7 +52,9 @@ public class ClientHandler implements Runnable{
         while (socket.isConnected()) {
             try {
                 messageFromClient = bufferedReader.readLine();
-                broadcastMessage(messageFromClient);
+                if (messageFromClient != null) {
+                    broadcastMessage(messageFromClient);
+                }
             } catch (IOException e) {
                 closeEverything();
                 break;
@@ -54,15 +66,24 @@ public class ClientHandler implements Runnable{
         // loop through array list and send msg to all clients
         for (ClientHandler clientHandler : clientHandlers) {
             try {
-                if (!clientHandler.clientUserName.equals(clientUserName)) {
-                    clientHandler.bufferedWriter.write(messageToSend);
-                    ChatClient.setSender(clientUserName);                   //sends the client user to chatclient for printing of the username [ username: hi]
-                    //explicitly send newline
-                    clientHandler.bufferedWriter.newLine();
-                    clientHandler.bufferedWriter.flush();
-                }
+                clientHandler.bufferedWriter.write(clientUserName + ": " +messageToSend);
+                //explicitly send newline
+                clientHandler.bufferedWriter.newLine();
+                clientHandler.bufferedWriter.flush();
             } catch(IOException e) {
                 closeEverything();
+            }
+        }
+    }
+
+    public static void removeClientHandler(String internalUserName) { // assuming all clientHandlers have distinct usernames.
+        for (int i = 0 ; i < clientHandlers.size() ; i++) {
+            if (clientHandlers.get(i).clientUserName.equals(internalUserName)) {
+                clientHandlers.get(i).broadcastMessage(internalUserName + " has left the chat.");
+                clientHandlers.remove(i);
+
+                System.out.println("Successfully removed " + internalUserName);
+                break;
             }
         }
     }
@@ -74,7 +95,6 @@ public class ClientHandler implements Runnable{
     }
 
     public synchronized void closeEverything() {
-        removeClientHandler();
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
