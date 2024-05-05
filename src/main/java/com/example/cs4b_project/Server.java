@@ -1,5 +1,6 @@
 package com.example.cs4b_project;
 
+import java.net.*;
 /*import java.net.*;
 import java.io.*;
 class Server{
@@ -25,6 +26,7 @@ class Server{
         s.close();
         ss.close();
     }
+}
 }
  */
 
@@ -89,6 +91,3 @@ public class Server {
         server.acceptConnections();
     }
 }
-
-
-

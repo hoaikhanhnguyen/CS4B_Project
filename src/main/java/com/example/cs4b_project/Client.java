@@ -1,5 +1,7 @@
 package com.example.cs4b_project;
 
+
+import java.net.*;
 /*import java.net.*;
 import java.io.*;
 class Client {
@@ -24,7 +26,6 @@ class Client {
         s.close();
     }
 }
-
  */
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -138,4 +139,3 @@ public class Client extends Application {
         launch(args);
     }
 }
-

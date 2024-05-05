@@ -1,5 +1,6 @@
 package com.example.cs4b_project;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -48,5 +49,9 @@ public class Controller {
         stage.setScene(scene);
         stage.show();
     }
-
+    @FXML
+    public void closeWindow() {
+        Platform.exit();
+        System.exit(0);
+    }
 }
