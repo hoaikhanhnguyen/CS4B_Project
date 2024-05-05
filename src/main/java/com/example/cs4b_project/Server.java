@@ -35,6 +35,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class Server {
     private static final int PORT = 1234;
@@ -44,8 +45,11 @@ public class Server {
     private ObjectOutputStream client1Out;
     private ObjectOutputStream client2Out;
 
+    private ArrayList<Socket> connections;
+
     public Server() throws IOException {
         serverSocket = new ServerSocket(PORT);
+        connections = new ArrayList<>();
         System.out.println("Game server is running on port " + PORT);
     }
 
@@ -53,21 +57,14 @@ public class Server {
         try {
             System.out.println("Waiting for players to join...");
 
-            client1 = serverSocket.accept();
-            System.out.println("Player 1 connected.");
-            client1Out = new ObjectOutputStream(client1.getOutputStream());
-            client1Out.writeObject("You are connected as Player 1. Waiting for Player 2...");
+            while (!serverSocket.isClosed()) {
 
-            client2 = serverSocket.accept();
-            System.out.println("Player 2 connected.");
-            client2Out = new ObjectOutputStream(client2.getOutputStream());
-            client2Out.writeObject("You are connected as Player 2.");
+                Socket client = serverSocket.accept();
+                connections.add(client);
+                System.out.println("client has connected!");
+                keepConnection(client);
 
-            client1Out.writeObject("Both players are connected. \nLet's play Tic Tac Toe!");
-            client2Out.writeObject("Both players are connected. \nLet's play Tic Tac Toe!");
-
-            keepConnection(client1, client1Out);
-            keepConnection(client2, client2Out);
+            }
 
         } catch (IOException e) {
             System.out.println("Server exception: " + e.getMessage());
@@ -75,10 +72,12 @@ public class Server {
         }
     }
 
-    private void keepConnection(Socket client, ObjectOutputStream out) {
+    private void keepConnection(Socket client) {
         new Thread(() -> {
             try {
-                while (true) {}
+                while (true) {
+                    // wait for messages
+                }
             } catch (Exception e) {
                 System.out.println("Error with client connection: " + e.getMessage());
                 e.printStackTrace();
