@@ -1,14 +1,12 @@
 package com.example.cs4b_project.ChatRoom;
 
+import com.example.cs4b_project.ClientHandler;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
-import java.util.Scanner;
-import static com.example.cs4b_project.ChatRoom.ClientHandler.clientHandlers;
 
 
 public class ChatClient {

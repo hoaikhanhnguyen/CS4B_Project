@@ -1,6 +1,5 @@
 package com.example.cs4b_project;
 
-import com.example.cs4b_project.ChatRoom.ClientHandler;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -20,30 +19,6 @@ public class Main extends Application {
         stage.setTitle("Tic Tac Toe!");
         stage.setScene(scene);
         stage.show();
-        ServerSocket serverSocket = new ServerSocket (1234);        //port for serversocket & initializes server here
-        listenForConnection(serverSocket);
-    }
-
-    public void listenForConnection(ServerSocket socket){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {         //initializes the clienthandler here
-                try{
-                    while(!socket.isClosed()){
-                        Socket socket1 = socket.accept();
-                         ClientHandler clientHandler = new ClientHandler(socket1, "client" + clients);
-                        Thread thread = new Thread(clientHandler);
-                        thread.start();
-                    }
-                }catch (IOException e){
-                    try {
-                        socket.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-            }
-        }).start();
     }
 
     public static void main(String[] args) throws IOException {

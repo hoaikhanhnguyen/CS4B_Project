@@ -1,4 +1,4 @@
-package com.example.cs4b_project.ChatRoom;
+package com.example.cs4b_project;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

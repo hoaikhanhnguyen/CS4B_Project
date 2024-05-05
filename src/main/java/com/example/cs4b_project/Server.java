@@ -37,7 +37,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server {
-    private static final int PORT = 3333;
+    private static final int PORT = 1234;
     private ServerSocket serverSocket;
     private Socket client1;
     private Socket client2;
