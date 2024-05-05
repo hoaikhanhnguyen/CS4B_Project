@@ -12,14 +12,7 @@ import java.io.IOException;
 
 public class Controller {
     @FXML
-    private Label welcomeText;
     private Button playAgainButton;
-
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Changed the button press text!!!");
-
-    }
 
     @FXML
     protected void open1Player() throws IOException {
@@ -43,7 +36,7 @@ public class Controller {
 
     @FXML
     protected void openOnlinePlayer() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("chatroom.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("waiting.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);

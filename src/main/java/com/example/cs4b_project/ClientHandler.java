@@ -39,7 +39,7 @@ public class ClientHandler implements Runnable{
                 e.printStackTrace();
             }
 
-            broadcastMessage(" (SERVER) " + clientUserName + " has entered the chat.");
+            //broadcastMessage(" (SERVER) " + clientUserName + " has entered the chat.");
         } catch(IOException e) {
             closeEverything();
         }
@@ -53,7 +53,7 @@ public class ClientHandler implements Runnable{
             try {
                 messageFromClient = bufferedReader.readLine();
                 if (messageFromClient != null) {
-                    broadcastMessage(messageFromClient);
+                    //broadcastMessage(messageFromClient);
                 }
             } catch (IOException e) {
                 closeEverything();
@@ -62,24 +62,24 @@ public class ClientHandler implements Runnable{
         }
     }
 
-    public void broadcastMessage(String messageToSend) {
-        // loop through array list and send msg to all clients
-        for (ClientHandler clientHandler : clientHandlers) {
-            try {
-                clientHandler.bufferedWriter.write(clientUserName + ": " +messageToSend);
-                //explicitly send newline
-                clientHandler.bufferedWriter.newLine();
-                clientHandler.bufferedWriter.flush();
-            } catch(IOException e) {
-                closeEverything();
-            }
-        }
-    }
+//    public void broadcastMessage(String messageToSend) {
+//        // loop through array list and send msg to all clients
+//        for (ClientHandler clientHandler : clientHandlers) {
+//            try {
+//                clientHandler.bufferedWriter.write(clientUserName + ": " +messageToSend);
+//                //explicitly send newline
+//                clientHandler.bufferedWriter.newLine();
+//                clientHandler.bufferedWriter.flush();
+//            } catch(IOException e) {
+//                closeEverything();
+//            }
+//        }
+//    }
 
     public static void removeClientHandler(String internalUserName) { // assuming all clientHandlers have distinct usernames.
         for (int i = 0 ; i < clientHandlers.size() ; i++) {
             if (clientHandlers.get(i).clientUserName.equals(internalUserName)) {
-                clientHandlers.get(i).broadcastMessage(internalUserName + " has left the chat.");
+                //clientHandlers.get(i).broadcastMessage(internalUserName + " has left the chat.");
                 clientHandlers.remove(i);
 
                 System.out.println("Successfully removed " + internalUserName);
@@ -91,7 +91,7 @@ public class ClientHandler implements Runnable{
     // when client leaves chat
     public void removeClientHandler() {
         clientHandlers.remove(this);
-        broadcastMessage(clientUserName + " has left the chat.");
+        //broadcastMessage(clientUserName + " has left the chat.");
     }
 
     public synchronized void closeEverything() {
