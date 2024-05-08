@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.*;
+import java.io.*;
+import java.net.Socket;
 
 public class Main extends Application {
 
