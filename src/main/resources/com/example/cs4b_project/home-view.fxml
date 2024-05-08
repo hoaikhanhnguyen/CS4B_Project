@@ -93,7 +93,7 @@
                         <Font name="Less Perfect DOS VGA" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="startOnlineGame" layoutX="38.0" layoutY="165.0" mnemonicParsing="false" onAction="#openOnlinePlayer" prefHeight="43.0" prefWidth="125.0" stylesheets="@stylesheet.css" text="Online Game">
+                  <Button fx:id="startOnlineGame" layoutX="38.0" layoutY="165.0" mnemonicParsing="false" onAction="#openOnlinePlayer_ver2" prefHeight="43.0" prefWidth="125.0" stylesheets="@stylesheet.css" text="Online Game">
                      <font>
                         <Font name="Less Perfect DOS VGA" size="14.0" />
                      </font>
