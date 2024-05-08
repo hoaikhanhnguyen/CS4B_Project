@@ -35,6 +35,16 @@ public class Controller {
     }
 
     @FXML
+    protected void openOnlinePlayer_ver2() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard2.fxml"));
+        fxmlLoader.setController(new Gameboard());
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
     protected void openOnlinePlayer() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("waiting.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
