@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.waiting">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.Waiting">
    <children>
       <Line endX="100.0" layoutX="258.0" layoutY="157.0" startX="-100.0" stroke="#f8f8f8">
          <effect>
@@ -13,12 +13,12 @@
          </effect>
       </Line>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="18.0" stroke="BLACK" strokeType="INSIDE" width="516.0" />
-      <Button fx:id="hostB" layoutX="172.0" layoutY="85.0" mnemonicParsing="false" onAction="#openHost" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Host Game">
+      <Button fx:id="hostB" layoutX="172.0" layoutY="85.0" mnemonicParsing="false" onAction="#openBoard" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Host Game">
          <effect>
             <DropShadow />
          </effect>
       </Button>
-      <Button fx:id="joinB" layoutX="172.0" layoutY="194.0" mnemonicParsing="false" onAction="#openGameList" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Join Game">
+      <Button fx:id="joinB" layoutX="172.0" layoutY="194.0" mnemonicParsing="false" onAction="#openBoard" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Join Game">
          <effect>
             <DropShadow />
          </effect>

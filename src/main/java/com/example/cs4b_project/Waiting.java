@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class waiting {
+public class Waiting {
     public Button joinB;
     public Button hostB;
 
 
-    public void openHost() throws IOException {
+    public void openBoard() throws IOException {
         Stage stage = (Stage) joinB.getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -21,7 +21,7 @@ public class waiting {
 
     public void openGameList() throws IOException {
         Stage stage = (Stage) joinB.getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("serverlist.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gamelist.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setScene(scene);
     }
