@@ -191,7 +191,36 @@ public class Online_game {
                     javafx.application.Platform.runLater(() ->
                             systemMsg2.setText(t.getMessage())
                     );
-                } // To handle other types of messages from the server.
+                } else if (m.getType().equals("WHICH_PLAYER")) {
+                    WhichPlayerMessage w = (WhichPlayerMessage) m;
+                    player = w.getPlayer();
+                    if (player == WhichPlayerMessage.PLAYER_1) {
+                        javafx.application.Platform.runLater(() ->
+                                systemMsg.setText("You are playing as player 1")
+                        );
+                    } else if (player == WhichPlayerMessage.PLAYER_2) {
+                        javafx.application.Platform.runLater(() ->
+                                systemMsg.setText("You are playing as player 2")
+                        );
+                    }
+                }
+                else if (m.getType().equals("STATUS")) {
+                    StatusMessage s = (StatusMessage) m;
+                    switch (s.getStatus()) {
+                        case StatusMessage.WAITING -> {
+
+                        }
+                        case StatusMessage.MAKE_MOVE -> {
+
+                        }
+                        case StatusMessage.WINNER_1 -> {
+
+                        }
+                        case StatusMessage.WINNER_2 -> {
+
+                        }
+                    }
+                }
                 else {
                     // Type of message is unknown - convert to string.
                     String text = message.toString();

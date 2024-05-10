@@ -3,13 +3,10 @@ package com.example.cs4b_project;
 import com.example.cs4b_project.Messages.*;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class Server {
     private static final int PORT = 1234;
@@ -25,9 +22,15 @@ public class Server {
 
     private ArrayList<GameInstance> games;
 
+    // Debug/Temporary variable to store the single game in the server
+    private Game game;
+
     public Server() throws IOException {
         serverSocket = new ServerSocket(PORT);
         connections = new ArrayList<>();
+        games = new ArrayList<>();
+        games.add(new GameInstance());
+        game = games.get(0).getGame();
         System.out.println("Game server is running on port " + PORT);
     }
 
@@ -38,7 +41,7 @@ public class Server {
             client1 = serverSocket.accept();
             System.out.println("Player 1 connected.");
             client1Out = new ObjectOutputStream(client1.getOutputStream());
-            client1Out.writeObject(new TextMessage("You are connected as Player 1."));
+            client1Out.writeObject(new WhichPlayerMessage(WhichPlayerMessage.PLAYER_1));
             clientOutputStreams.add(client1Out);
             if (clientOutputStreams.size() == 1) {
                 client1Out.flush();
@@ -48,7 +51,7 @@ public class Server {
             client2 = serverSocket.accept();
             System.out.println("Player 2 connected.");
             client2Out = new ObjectOutputStream(client2.getOutputStream());
-            client2Out.writeObject(new TextMessage("You are connected as Player 2."));
+            client2Out.writeObject(new WhichPlayerMessage(WhichPlayerMessage.PLAYER_2));
             clientOutputStreams.add(client2Out);
 
 
@@ -58,6 +61,10 @@ public class Server {
                 client1Out.writeObject(new TextMessage("Both players are connected. Let's play!"));
                 client2Out.writeObject(new TextMessage("Both players are connected. Let's play!"));
             }
+
+            // Game loop
+            client1Out.writeObject(new StatusMessage(StatusMessage.MAKE_MOVE, game.getBoard()));
+            client1Out.writeObject(new StatusMessage(StatusMessage.WAITING, game.getBoard()));
 
             keepConnection(client1, client1Out);
             keepConnection(client2, client2Out);
