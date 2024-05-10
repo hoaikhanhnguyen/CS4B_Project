@@ -1,5 +1,6 @@
 package com.example.cs4b_project;
 
+import com.example.cs4b_project.Messages.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -182,24 +183,20 @@ public class Online_game {
             Object message;
             while ((message = fromServer.readObject()) != null)
             {
-                String text = (String) message;
-                System.out.println(text);
+                Message m = (Message) message;
 
-                if (text.equals("Waiting for Player 2...")) {
+                if (m.getType().equals("TEXT")) {
+                    // Handle TextMessage
+                    TextMessage t = (TextMessage) m;
+                    javafx.application.Platform.runLater(() ->
+                            systemMsg2.setText(t.getMessage())
+                    );
+                } // To handle other types of messages from the server.
+                else {
+                    // Type of message is unknown - convert to string.
+                    String text = message.toString();
                     javafx.application.Platform.runLater(() ->
                             systemMsg2.setText(text)
-                    );
-                }
-                else if (text.equals("Both players are connected. Let's play!")) {
-                    javafx.application.Platform.runLater(() ->
-                            systemMsg2.setText(text)
-                    );
-//                    FXMLLoader loader = new FXMLLoader(getClass().getResource("gameboard.fxml"));
-//                    root = loader.load();
-//                    gameboa
-                }else {
-                    javafx.application.Platform.runLater(() ->
-                            systemMsg.setText(text)
                     );
                 }
                 System.out.println("testing handle server msg");
@@ -208,6 +205,7 @@ public class Online_game {
             javafx.application.Platform.runLater(() ->
                     systemMsg.setText("Connection error: " + e.getMessage())
             );
+            System.out.println(e.getMessage());
         } finally {
             closeResources();
         }
