@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox id="ui" prefHeight="400.0" prefWidth="161.0">
+         <children>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="114.0" layoutX="-29.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <Button fx:id="buttonNewGame" layoutX="18.0" layoutY="34.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="124.0" stylesheets="@stylesheet.css" text="RESET GAME">
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                           <font>
+                              <Font name="Less Perfect DOS VGA" size="13.0" />
+                           </font></Button>
+                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="96.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="159.0" />
+                        <Pane layoutX="-2.0" layoutY="53.0" prefHeight="37.0" prefWidth="162.0">
+                           <children>
+                              <Text layoutX="7.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WINS:" wrappingWidth="41.742187499999886">
+                                 <font>
+                                    <Font name="Less Perfect DOS VGA" size="11.0" />
+                                 </font></Text>
+                              <Text fill="#0831e7" layoutX="71.0" layoutY="13.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X">
+                                 <font>
+                                    <Font size="33.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="playerOneWinCount" layoutX="38.0" layoutY="24.0" text="0" />
+                           </children>
+                        </Pane>
+                        <Label fx:id="playerOneLabel" layoutX="6.0" prefHeight="37.0" prefWidth="150.0" text="Player 1">
+                           <font>
+                              <Font name="Less Perfect DOS VGA" size="14.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="198.0" prefWidth="288.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="242.0" layoutX="-20.0" layoutY="-25.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                     </children></AnchorPane>
+              </items>
+            </SplitPane>
+         </children>
+      </VBox>
+      <VBox id="ui" layoutX="439.0" prefHeight="400.0" prefWidth="161.0">
+         <children>
+            <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <Pane layoutX="25.0" layoutY="33.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="125.0" layoutX="-43.0" layoutY="-33.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                           </children></Pane>
+                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="285.0" prefWidth="160.0">
+                     <children>
+                        <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="96.0" layoutX="1.0" stroke="BLACK" strokeType="INSIDE" width="165.0" />
+                        <Pane layoutX="7.0" layoutY="48.0" prefHeight="37.0" prefWidth="162.0">
+                           <children>
+                              <Text layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WINS:" wrappingWidth="41.742187499999886">
+                                 <font>
+                                    <Font name="Less Perfect DOS VGA" size="11.0" />
+                                 </font></Text>
+                              <Text fill="#d40505" layoutX="62.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="O">
+                                 <font>
+                                    <Font size="33.0" />
+                                 </font>
+                              </Text>
+                              <Label fx:id="playerTwoWinCount" layoutX="31.0" layoutY="29.0" text="0" />
+                           </children>
+                        </Pane>
+                        <Label fx:id="playerTwoLabel" layoutX="6.0" prefHeight="37.0" prefWidth="149.0" text="Player 2">
+                           <font>
+                              <Font name="Less Perfect DOS VGA" size="14.0" />
+                           </font>
+                        </Label>
+                     </children></AnchorPane>
+              </items>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </SplitPane>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="199.0" stroke="BLACK" strokeType="INSIDE" width="165.0" />
+         </children></VBox>
+      <Pane layoutX="159.0" prefHeight="102.0" prefWidth="281.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#003c71" height="448.0" layoutX="1.0" layoutY="-49.0" stroke="BLACK" strokeType="INSIDE" width="282.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="65.0" layoutX="41.0" layoutY="19.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                  <Text layoutX="59.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tic-Tac-Toe">
+               <font>
+                  <Font name="Arial" size="30.0" />
+               </font>
+            </Text>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#43c6fa" height="44.0" layoutX="65.0" layoutY="349.0" stroke="BLACK" strokeType="INSIDE" width="150.0" />
+            <Text layoutX="48.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Turn Count:" wrappingWidth="89.60000000000002" x="30.0" y="35.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Text>
+            <Label fx:id="turnCount" layoutX="168.0" layoutY="355.0" prefHeight="25.0" prefWidth="19.0" text="0">
+               <font>
+                  <Font name="Less Perfect DOS VGA" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="systemMsg" layoutX="1.0" layoutY="283.0" prefHeight="34.0" prefWidth="226.0" text="System Message" textFill="#fcebeb">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+            <Label fx:id="systemMsg2" layoutX="1.0" layoutY="312.0" prefHeight="34.0" prefWidth="226.0" text="System Message" textFill="#fcebeb">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </children></Pane>
+      <GridPane blendMode="SRC_ATOP" hgap="5.0" layoutX="161.0" layoutY="98.0" prefHeight="185.0" prefWidth="275.0" vgap="5.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="button1" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.valignment="CENTER" />
+            <Button fx:id="button2" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.columnIndex="1" />
+            <Button fx:id="button3" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.columnIndex="2" />
+            <Button fx:id="button4" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.rowIndex="1" />
+            <Button fx:id="button5" layoutX="10.0" layoutY="74.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button fx:id="button6" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="button7" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.rowIndex="2" />
+            <Button fx:id="button8" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Button fx:id="button9" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="91.0" prefWidth="131.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
