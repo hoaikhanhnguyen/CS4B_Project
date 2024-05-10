@@ -1,41 +1,12 @@
 package com.example.cs4b_project;
 
-import java.net.*;
-/*import java.net.*;
-import java.io.*;
-class Server{
-    public static void main(String args[])throws Exception{
-
-        ServerSocket ss = new ServerSocket(3333);
-        Socket s = ss.accept();
-        DataInputStream din = new DataInputStream(s.getInputStream());
-        DataOutputStream dout = new DataOutputStream(s.getOutputStream());
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-        String str="",str2="";
-
-        while(!str.equals("stop")){
-            str = din.readUTF();
-            System.out.println("client says: " + str);
-            str2 = br.readLine();
-            dout.writeUTF(str2);
-            dout.flush();
-        }
-
-        din.close();
-        s.close();
-        ss.close();
-    }
-}
-}
- */
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
     private static final int PORT = 1234;
@@ -44,7 +15,9 @@ public class Server {
     private Socket client2;
     private ObjectOutputStream client1Out;
     private ObjectOutputStream client2Out;
+    private char clientId;
 
+    private static List<ObjectOutputStream> clientOutputStreams = new ArrayList<ObjectOutputStream>();
     private ArrayList<Socket> connections;
 
     public Server() throws IOException {
@@ -55,29 +28,31 @@ public class Server {
 
     public void acceptConnections() {
         try {
-           /* System.out.println("Waiting for players to join...");
-
-            while (!serverSocket.isClosed()) {
-
-                Socket client = serverSocket.accept();
-                connections.add(client);
-                System.out.println("client has connected!");
-                keepConnection(client);
-*/
             System.out.println("Waiting for players to join...");
 
             client1 = serverSocket.accept();
             System.out.println("Player 1 connected.");
             client1Out = new ObjectOutputStream(client1.getOutputStream());
-            client1Out.writeObject("You are connected as Player 1. Waiting for Player 2...");
+            client1Out.writeObject("You are connected as Player 1.");
+            clientOutputStreams.add(client1Out);
+            if (clientOutputStreams.size() == 1) {
+                client1Out.flush();
+                client1Out.writeObject("Waiting for Player 2...");
+            }
 
             client2 = serverSocket.accept();
             System.out.println("Player 2 connected.");
             client2Out = new ObjectOutputStream(client2.getOutputStream());
             client2Out.writeObject("You are connected as Player 2.");
+            clientOutputStreams.add(client2Out);
 
-            client1Out.writeObject("Both players are connected. \nLet's play Tic Tac Toe!");
-            client2Out.writeObject("Both players are connected. \nLet's play Tic Tac Toe!");
+
+            if (clientOutputStreams.size() == 2) {
+                client1Out.flush();
+                client2Out.flush();
+                client1Out.writeObject("Both players are connected. Let's play!");
+                client2Out.writeObject("Both players are connected. Let's play!");
+            }
 
             keepConnection(client1, client1Out);
             keepConnection(client2, client2Out);
@@ -88,6 +63,15 @@ public class Server {
             e.printStackTrace();
         }
     }
+
+
+    private void setClientId() {
+//            if (clientOutputStreams.size() == 1) {
+//                this.id = Game.CIRCLE;
+//            } else {
+//                this.id = Game.CROSS;
+//            }
+        }
 
     private void keepConnection(Socket client, ObjectOutputStream out) {
         new Thread(() -> {

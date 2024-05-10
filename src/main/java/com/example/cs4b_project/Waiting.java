@@ -31,8 +31,10 @@ public class Waiting {
 
         socket = new Socket("localhost", 1234);
         System.out.println("connected as: " + userName);
+
         toServer = new ObjectOutputStream(socket.getOutputStream());
         fromServer = new ObjectInputStream(socket.getInputStream());
+
         //System.out.println("client has connected!");
         //System.out.println("client has connected!");
         try {
