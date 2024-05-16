@@ -22,8 +22,6 @@ public class Server {
 
     private static final int PORT = 1234;
     private static ServerSocket serverSocket;
-    //private Socket client1;--
-    //private Socket client2;--
     private static ObjectOutputStream client1Out;
     private static ObjectOutputStream client2Out;
     private static ObjectInputStream client1In;
@@ -110,7 +108,7 @@ public class Server {
                 System.out.println("Session is full. Creating new session.");
                 newSession();
             }catch (Exception e){
-                System.out.println("ERROR!!!");
+                System.out.println("Server exception: " + e.getMessage());
             }
         }).start();
 
