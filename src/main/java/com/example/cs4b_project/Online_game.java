@@ -14,6 +14,7 @@ import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Arrays;
 
 public class Online_game {
     @FXML
@@ -41,7 +42,7 @@ public class Online_game {
     public Game game;
     public int playerOneWins = 0;
     public int playerTwoWins = 0;
-    public int player = 1;
+    public int player;
 
     public void gameWon(int player) {
 
@@ -75,20 +76,20 @@ public class Online_game {
         } catch (IOException e) {
             System.out.println("There was an error opening the win screen.");
         }
-        restartGame();
+        //restartGame();
     }
 
-    public void restartGame() {
-        for (int j = 0; j < 9; j++) {
-            boardArray[j].setText("");              // this allows for an isEmpty() check
-            boardArray[j].setDisable(false);
-        }
-        player = 1;
-        updatePlayerTurnInd(player);
-        game.reset();
-        turnCount.setText("0");
-        game.dumpBoard();
-    }
+//    public void restartGame() {
+//        for (int j = 0; j < 9; j++) {
+//            boardArray[j].setText("");              // this allows for an isEmpty() check
+//            boardArray[j].setDisable(false);
+//        }
+//        //player = 1;
+//        updatePlayerTurnInd(player);
+//        game.reset();
+//        turnCount.setText("0");
+//        game.dumpBoard();
+//    }
 
     public void updateTurnCount() {
         int turns = Integer.parseInt(turnCount.getText());
@@ -117,13 +118,14 @@ public class Online_game {
     public void initialize() {
         try {
             socket = new Socket("localhost", 1234);
-            System.out.println("connected as: " + userName);
+            System.out.println("connected");
 
             toServer = new ObjectOutputStream(socket.getOutputStream());
             fromServer = new ObjectInputStream(socket.getInputStream());
 
             new Thread(this::handleServerMessages).start();
         } catch (Exception ex) {
+            //System.out.println("Server is not up. Error: " + ex);
             throw new RuntimeException(ex);
         }
 
@@ -134,7 +136,7 @@ public class Online_game {
         game = new Game();
 
         // Set Initial Player Turn Indicator
-        updatePlayerTurnInd(player);
+       // updatePlayerTurnInd(player);
 
         String[] textColors = {"-fx-text-fill: #0831e7;", "-fx-text-fill: #d40505;"};
 
@@ -144,13 +146,12 @@ public class Online_game {
                 String textColor = textColors[player == 1 ? 0 : 1];
                 boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
                 boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
-                boardArray[buttonPos].setDisable(true);
+                //boardArray[buttonPos].setDisable(true);
+                disableAllButtons();
+                sendMove(buttonPos);
 
                 // Set Internal Board
                 game.setPos(buttonPos, player);
-
-                // Update Player
-                player = 1+(player%2);
 
                 // Update turn count
                 updateTurnCount();
@@ -171,9 +172,10 @@ public class Online_game {
             });
 
         }
+
         // resets board when "New Game" is pressed
         buttonNewGame.setOnAction((ActionEvent newGame) -> {
-            restartGame();
+            //restartGame();
             newGame.consume();
         });
     }
@@ -181,6 +183,7 @@ public class Online_game {
     private void handleServerMessages() {
         try {
             Object message;
+            System.out.println("Msg Received from Server");
             while ((message = fromServer.readObject()) != null)
             {
                 Message m = (Message) message;
@@ -194,6 +197,7 @@ public class Online_game {
                 } else if (m.getType().equals("WHICH_PLAYER")) {
                     WhichPlayerMessage w = (WhichPlayerMessage) m;
                     player = w.getPlayer();
+                    System.out.println("connected as player " + player);
                     if (player == WhichPlayerMessage.PLAYER_1) {
                         javafx.application.Platform.runLater(() ->
                                 systemMsg.setText("You are playing as player 1")
@@ -207,19 +211,31 @@ public class Online_game {
                 else if (m.getType().equals("STATUS")) {
                     StatusMessage s = (StatusMessage) m;
                     switch (s.getStatus()) {
+                        case StatusMessage.START_GAME -> {
+                            String text = message.toString();
+                            startGame(text);
+                        }
                         case StatusMessage.WAITING -> {
-
+                            disableAllButtons();
                         }
                         case StatusMessage.MAKE_MOVE -> {
-
+                            enableAllButtons();
                         }
                         case StatusMessage.WINNER_1 -> {
-
+                            System.out.println("Winner is Player 1");
+                            disableAllButtons();
                         }
                         case StatusMessage.WINNER_2 -> {
-
+                            System.out.println("Winner is Player 2");
+                            disableAllButtons();
                         }
                     }
+                }
+                else if (m.getType().equals("MOVE")) {
+                    MoveMessage move = (MoveMessage) m;
+                    System.out.println("UpdatingBoard");
+                    updateBoard(move.pos);
+                    disableButtons();
                 }
                 else {
                     // Type of message is unknown - convert to string.
@@ -228,7 +244,6 @@ public class Online_game {
                             systemMsg2.setText(text)
                     );
                 }
-                System.out.println("testing handle server msg");
             }
         } catch (Exception e) {
             javafx.application.Platform.runLater(() ->
@@ -239,17 +254,60 @@ public class Online_game {
             closeResources();
         }
     }
+    private void startGame(String text) {
+        // make new method and enable after game start
+        System.out.println("StartGameFunction");
+        javafx.application.Platform.runLater(() ->
+                systemMsg2.setText(text)
+        );
+        if (this.player == WhichPlayerMessage.PLAYER_1) {
+            enableAllButtons();
+        }
+    }
 
-//    private void sendMove(int index) {
-//        try {
-//            toServer.writeObject("MOVE " + index);
-//            buttons[index].setDisable(true);
-//        } catch (Exception ex) {
-//            javafx.application.Platform.runLater(() ->
-//                    textArea.appendText("Failed to send move to server: " + ex.getMessage() + "\n")
-//            );
-//        }
-//    }
+    private void enableAllButtons() {
+        for (int i = 0 ; i < 9 ; i++) {
+            int buttonPos = i;
+            boardArray[buttonPos].setDisable(false);
+        }
+    }
+
+    private void disableAllButtons() {
+        for (int i = 0 ; i < 9 ; i++) {
+            int buttonPos = i;
+            boardArray[buttonPos].setDisable(true);
+        }
+    }
+    private void sendMove(int index) {
+        try {
+            toServer.writeObject(new MoveMessage(index));
+            System.out.println("Sent Move to Server");
+            System.out.println("Selected: " + index);
+        } catch (Exception ex) {
+            javafx.application.Platform.runLater(() ->
+                    systemMsg2.setText("Failed to send move to server: " + ex.getMessage() + "\n")
+            );
+        }
+    }
+
+    private void disableButtons() {
+        System.out.println("Enabling Buttons");
+        System.out.println(Arrays.toString(game.getBoard()));
+        for (int i = 0 ; i < 9 ; i++) {
+            if (game.getBoard()[i] != 0) {
+                boardArray[i].setDisable(true);
+            }
+        }
+    }
+
+    private void updateBoard(int pos) {
+        javafx.application.Platform.runLater(() ->
+                boardArray[pos].setText(player == 2 ? "X" : "O" )
+        );
+        game.setPos(pos, player == 2 ? 1 : 2);
+        System.out.println("Set position: " + pos);
+        System.out.println("For Player: " + player);
+    }
 
     private void closeResources() {
         try {

@@ -4,6 +4,7 @@ import com.example.cs4b_project.Messages.*;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -15,6 +16,9 @@ public class Server {
     private Socket client2;
     private ObjectOutputStream client1Out;
     private ObjectOutputStream client2Out;
+    private ObjectInputStream client1In;
+    private ObjectInputStream client2In;
+
     private char clientId;
 
     private static ArrayList<ObjectOutputStream> clientOutputStreams = new ArrayList<ObjectOutputStream>();
@@ -60,14 +64,21 @@ public class Server {
                 client2Out.flush();
                 client1Out.writeObject(new TextMessage("Both players are connected. Let's play!"));
                 client2Out.writeObject(new TextMessage("Both players are connected. Let's play!"));
+                client1Out.writeObject(new StatusMessage(StatusMessage.START_GAME, game.getBoard()));
+                client1Out.writeObject(new StatusMessage(StatusMessage.START_GAME, game.getBoard()));
             }
 
             // Game loop
             client1Out.writeObject(new StatusMessage(StatusMessage.MAKE_MOVE, game.getBoard()));
-            client1Out.writeObject(new StatusMessage(StatusMessage.WAITING, game.getBoard()));
+            client2Out.writeObject(new StatusMessage(StatusMessage.WAITING, game.getBoard()));
 
             keepConnection(client1, client1Out);
             keepConnection(client2, client2Out);
+
+            client1In = new ObjectInputStream(client1.getInputStream());
+            client2In = new ObjectInputStream(client2.getInputStream());
+            keepConnection(client1, client1In);
+            keepConnection(client2, client2In);
 
 
         } catch (IOException e) {
@@ -82,6 +93,38 @@ public class Server {
                 try {
                     while (true) {
                         // wait for messages
+                    }
+                } catch (Exception e) {
+                    System.out.println("Error with client connection: " + e.getMessage());
+                    e.printStackTrace();
+                }
+            }).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void keepConnection(Socket client, ObjectInputStream in) {
+        try {
+            new Thread(() -> {
+                try {
+                    while (true) {
+                        Object move = in.readObject();
+                        System.out.println("OBJECT READ");
+                        System.out.println("From Client: " + client);
+                        System.out.println("Printing input: " + move);
+
+                        if(client == client1) {
+                            client2Out.writeObject(new StatusMessage(StatusMessage.MAKE_MOVE, game.getBoard()));
+                            client1Out.writeObject(new StatusMessage(StatusMessage.WAITING, game.getBoard()));
+
+                            client2Out.writeObject(move);
+                        }else if (client == client2 ) {
+                            client1Out.writeObject(new StatusMessage(StatusMessage.MAKE_MOVE, game.getBoard()));
+                            client2Out.writeObject(new StatusMessage(StatusMessage.WAITING, game.getBoard()));
+
+                            client1Out.writeObject(move);
+                        }
                     }
                 } catch (Exception e) {
                     System.out.println("Error with client connection: " + e.getMessage());

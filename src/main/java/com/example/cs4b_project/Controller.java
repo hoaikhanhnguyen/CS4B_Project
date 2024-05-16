@@ -13,6 +13,8 @@ import java.io.IOException;
 public class Controller {
     @FXML
     private Button playAgainButton;
+    @FXML
+    private Button startOnlineGame;
 
     @FXML
     protected void open1Player() throws IOException {
@@ -42,6 +44,10 @@ public class Controller {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.show();
+
+        // Closes the win scene and opens the previous (gameboard)
+        Stage currentScene = (Stage) startOnlineGame.getScene().getWindow();
+        currentScene.close();
     }
 
 //    @FXML

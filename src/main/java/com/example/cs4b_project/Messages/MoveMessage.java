@@ -9,7 +9,7 @@ package com.example.cs4b_project.Messages;
  ******************************************************************************
  */
 public class MoveMessage extends Message {
-    private int pos;
+    public int pos;
 
     public MoveMessage(int pos)
     {
