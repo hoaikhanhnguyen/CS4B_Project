@@ -50,32 +50,16 @@ public class Online_game {
             if (player == 1) {
                 playerOneWins++;
                 playerOneWinCount.setText(Integer.toString(playerOneWins));
+                sendMove(10);
             }
             if (player == 2) {
                 playerTwoWins++;
                 playerTwoWinCount.setText(Integer.toString(playerTwoWins));
+                sendMove(20);
             }
         }
 
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
-            // Load stage onto scene
-            Scene scene = new Scene(fxmlLoader.load());
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            // Set up WinMenu controller with proper winner
-            WinMenu winMenuController = fxmlLoader.getController();
-            winMenuController.setWinner(player);
-
-            // Set modality to WINDOW_MODAL so that user cannot interact with board
-            stage.initModality(Modality.APPLICATION_MODAL);
-
-            // Show the stage
-            stage.showAndWait();
-        } catch (IOException e) {
-            System.out.println("There was an error opening the win screen.");
-        }
+        displayWinScreen(player);
         //restartGame();
     }
 
@@ -161,10 +145,13 @@ public class Online_game {
 
                 if (game.isComplete() == 1) {
                     gameWon(1);
+                    //sendMove(10);
                 } else if (game.isComplete() == 2) {
                     gameWon(2);
+                    //sendMove(20);
                 } else if (game.isComplete() == 3) {
                     gameWon(3);
+                    //sendMove(30);
                 }
 
                 game.dumpBoard();
@@ -223,10 +210,18 @@ public class Online_game {
                         }
                         case StatusMessage.WINNER_1 -> {
                             System.out.println("Winner is Player 1");
+
+                            javafx.application.Platform.runLater(() ->
+                                    displayWinScreen(1)
+                            );
                             disableAllButtons();
                         }
                         case StatusMessage.WINNER_2 -> {
                             System.out.println("Winner is Player 2");
+
+                            javafx.application.Platform.runLater(() ->
+                                    displayWinScreen(2)
+                            );
                             disableAllButtons();
                         }
                     }
@@ -280,9 +275,23 @@ public class Online_game {
     }
     private void sendMove(int index) {
         try {
-            toServer.writeObject(new MoveMessage(index));
-            System.out.println("Sent Move to Server");
-            System.out.println("Selected: " + index);
+            if (index >= 0 && index <= 9) {
+                toServer.writeObject(new MoveMessage(index));
+                System.out.println("Sent Move to Server");
+                System.out.println("Selected: " + index);
+            } else if (index == 10){
+                toServer.writeObject(new StatusMessage(StatusMessage.WINNER_1, game.getBoard()));
+                System.out.println("Sent Game Over to Server");
+                System.out.println("Game is Over!" + index);
+            } else if (index == 20) {
+                toServer.writeObject(new StatusMessage(StatusMessage.WINNER_2, game.getBoard()));
+                System.out.println("Sent Game Over to Server");
+                System.out.println("Game is Over!" + index);
+            } else if (index == 30) {
+                toServer.writeObject(new StatusMessage(StatusMessage.WINNER_3, game.getBoard()));
+                System.out.println("Sent Game Over to Server");
+                System.out.println("Game is Over!" + index);
+            }
         } catch (Exception ex) {
             javafx.application.Platform.runLater(() ->
                     systemMsg2.setText("Failed to send move to server: " + ex.getMessage() + "\n")
@@ -307,6 +316,28 @@ public class Online_game {
         game.setPos(pos, player == 2 ? 1 : 2);
         System.out.println("Set position: " + pos);
         System.out.println("For Player: " + player);
+    }
+
+    private void displayWinScreen(int player) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
+            // Load stage onto scene
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+
+            // Set up WinMenu controller with proper winner
+            WinMenu winMenuController = fxmlLoader.getController();
+            winMenuController.setWinner(player);
+
+            // Set modality to WINDOW_MODAL so that user cannot interact with board
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            // Show the stage
+            stage.showAndWait();
+        } catch (IOException e) {
+            System.out.println("There was an error opening the win screen.");
+        }
     }
 
     private void closeResources() {
