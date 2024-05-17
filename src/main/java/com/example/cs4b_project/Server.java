@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class Server {
 
     //singleton to store a single game session
-    private static class Session {
+    public static class Session {
         private Socket client1;
         private Socket client2;
         private GameInstance gameSession;

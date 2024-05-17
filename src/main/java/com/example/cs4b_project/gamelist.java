@@ -7,6 +7,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class gamelist {
 
@@ -14,8 +15,11 @@ public class gamelist {
     public VBox containerV;
 
     public void initialize()throws IOException {
-        numGames += 1;
-        makeLabel("james");
+
+        System.out.println("SIZE OF SESSIONS->" + Server.sessions.size());
+        for(int i=0; i<Server.sessions.size();i++){
+            makeLabel("session"+i);
+        }
     }
 
     public void makeLabel(String name){

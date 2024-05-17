@@ -38,8 +38,8 @@ public class Controller {
 
     @FXML
     protected void openOnlinePlayer_ver2() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("online_game.fxml"));
-        fxmlLoader.setController(new Online_game());
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("waiting.fxml"));
+        //fxmlLoader.setController(new Online_game());
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = new Stage();
         stage.setScene(scene);
