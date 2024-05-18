@@ -96,6 +96,7 @@ public class Gameboard {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
+            fxmlLoader.setController(new WinMenu());
             // Load stage onto scene
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();

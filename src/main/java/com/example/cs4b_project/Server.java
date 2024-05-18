@@ -87,8 +87,8 @@ public class Server {
                     client2Out.flush();
                     client1Out.writeObject(new TextMessage("Both players are connected. Let's play!"));
                     client2Out.writeObject(new TextMessage("Both players are connected. Let's play!"));
-                    client1Out.writeObject(new StatusMessage(StatusMessage.START_GAME, game.getBoard()));
-                    client1Out.writeObject(new StatusMessage(StatusMessage.START_GAME, game.getBoard()));
+                    //client1Out.writeObject(new StatusMessage(StatusMessage.START_GAME, game.getBoard()));
+                    //client2Out.writeObject(new StatusMessage(StatusMessage.START_GAME, game.getBoard()));
                 }
 
                 // Game loop

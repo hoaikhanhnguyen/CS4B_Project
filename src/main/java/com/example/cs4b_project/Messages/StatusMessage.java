@@ -19,6 +19,7 @@ public class StatusMessage extends Message {
     public static final int WINNER_2 = 3;
     public static final int WINNER_3 = 5;
     public static final int START_GAME = 4;
+    public static final int RESTART = 7;
 
     private int[] board = new int[9];
 

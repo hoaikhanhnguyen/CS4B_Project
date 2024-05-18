@@ -60,20 +60,22 @@ public class Online_game {
         }
 
         displayWinScreen(player);
-        //restartGame();
+        restartGame();
+        sendMove(40);
     }
 
-//    public void restartGame() {
-//        for (int j = 0; j < 9; j++) {
-//            boardArray[j].setText("");              // this allows for an isEmpty() check
-//            boardArray[j].setDisable(false);
-//        }
-//        //player = 1;
-//        updatePlayerTurnInd(player);
-//        game.reset();
-//        turnCount.setText("0");
-//        game.dumpBoard();
-//    }
+
+    public void restartGame() {
+        for (int j = 0; j < 9; j++) {
+            boardArray[j].setText("");              // this allows for an isEmpty() check
+            boardArray[j].setDisable(false);
+        }
+        //player = 1;
+        updatePlayerTurnInd(player);
+        game.reset();
+        turnCount.setText("0");
+        game.dumpBoard();
+    }
 
     public void updateTurnCount() {
         int turns = Integer.parseInt(turnCount.getText());
@@ -162,12 +164,13 @@ public class Online_game {
 
         // resets board when "New Game" is pressed
         buttonNewGame.setOnAction((ActionEvent newGame) -> {
-            //restartGame();
+            restartGame();
+            sendMove(40);
             newGame.consume();
         });
     }
 
-    private void handleServerMessages() {
+    private synchronized void handleServerMessages() {
         try {
             Object message;
             System.out.println("Msg Received from Server");
@@ -224,6 +227,12 @@ public class Online_game {
                             );
                             disableAllButtons();
                         }
+                        case StatusMessage.RESTART -> {
+                            System.out.println("Restarting the game.");
+
+                            javafx.application.Platform.runLater(this::restartGame);
+
+                        }
                     }
                 }
                 else if (m.getType().equals("MOVE")) {
@@ -273,7 +282,7 @@ public class Online_game {
             boardArray[buttonPos].setDisable(true);
         }
     }
-    private void sendMove(int index) {
+    protected void sendMove(int index) {
         try {
             if (index >= 0 && index <= 9) {
                 toServer.writeObject(new MoveMessage(index));
@@ -291,6 +300,10 @@ public class Online_game {
                 toServer.writeObject(new StatusMessage(StatusMessage.WINNER_3, game.getBoard()));
                 System.out.println("Sent Game Over to Server");
                 System.out.println("Game is Over!" + index);
+            } else if (index == 40){
+                toServer.writeObject(new StatusMessage(StatusMessage.RESTART, game.getBoard()));
+                System.out.println("Sent Restart to Server");
+                System.out.println("Game is Reset!" + index);
             }
         } catch (Exception ex) {
             javafx.application.Platform.runLater(() ->
@@ -321,13 +334,14 @@ public class Online_game {
     private void displayWinScreen(int player) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
+            fxmlLoader.setController(new Online_WinMenu());
             // Load stage onto scene
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
             stage.setScene(scene);
 
             // Set up WinMenu controller with proper winner
-            WinMenu winMenuController = fxmlLoader.getController();
+            Online_WinMenu winMenuController = fxmlLoader.getController();
             winMenuController.setWinner(player);
 
             // Set modality to WINDOW_MODAL so that user cannot interact with board
