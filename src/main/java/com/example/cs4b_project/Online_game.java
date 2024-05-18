@@ -14,6 +14,7 @@ import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Online_game {
@@ -51,11 +52,13 @@ public class Online_game {
                 playerOneWins++;
                 playerOneWinCount.setText(Integer.toString(playerOneWins));
                 sendMove(10);
+                sendMove(80);
             }
             if (player == 2) {
                 playerTwoWins++;
                 playerTwoWinCount.setText(Integer.toString(playerTwoWins));
                 sendMove(20);
+                sendMove(90);
             }
         }
 
@@ -70,8 +73,7 @@ public class Online_game {
             boardArray[j].setText("");              // this allows for an isEmpty() check
             boardArray[j].setDisable(false);
         }
-        //player = 1;
-        updatePlayerTurnInd(player);
+
         game.reset();
         turnCount.setText("0");
         game.dumpBoard();
@@ -100,6 +102,39 @@ public class Online_game {
             playerTwoLabel.setUnderline(true);
         }
     }
+
+    public void disableTile(int moved){
+        boardArray[moved].setDisable(true);
+    }
+
+    public void updateWinsP1(){
+        playerOneWins++;
+        playerOneWinCount.setText(Integer.toString(playerOneWins));
+    }
+    public void updateWinsP2(){
+        playerTwoWins++;
+        playerTwoWinCount.setText(Integer.toString(playerTwoWins));
+    }
+
+    public void indicatorStateP1(){
+        playerOneLabel.setText("Player 1's Turn!");
+        playerOneLabel.setUnderline(true);
+        playerOneLabel.setTextFill(Color.web("#00ff15"));
+        playerTwoLabel.setText("Player 2");
+        playerTwoLabel.setTextFill(Color.web("#000000"));
+        playerTwoLabel.setUnderline(false);
+    }
+
+    public void indicatorStateP2(){
+        playerOneLabel.setText("Player 1");
+        playerOneLabel.setUnderline(false);
+        playerOneLabel.setTextFill(Color.web("#000000"));
+        playerTwoLabel.setText("Player 2's Turn!");
+        playerTwoLabel.setTextFill(Color.web("#00ff15"));
+        playerTwoLabel.setUnderline(true);
+    }
+
+
 
     public void initialize() {
         try {
@@ -141,9 +176,6 @@ public class Online_game {
 
                 // Update turn count
                 updateTurnCount();
-
-                // Update Player Turn Indicator
-                updatePlayerTurnInd(player);
 
                 if (game.isComplete() == 1) {
                     gameWon(1);
@@ -233,6 +265,27 @@ public class Online_game {
                             javafx.application.Platform.runLater(this::restartGame);
 
                         }
+                        case StatusMessage.UPDATE_COUNTER -> {
+                            System.out.println("Updating the counter.");
+                            javafx.application.Platform.runLater(this::updateTurnCount);
+
+                        }
+                        case StatusMessage.CHANGE_TURN_1 -> {
+                            System.out.println("Updating the turn.");
+                            javafx.application.Platform.runLater(this::indicatorStateP1);
+                        }
+                        case StatusMessage.CHANGE_TURN_2 -> {
+                            System.out.println("Updating the turn.");
+                            javafx.application.Platform.runLater(this::indicatorStateP2);
+                        }
+                        case StatusMessage.UPDATE_WIN_COUNTER_1 -> {
+                            System.out.println("Updating the wins.");
+                            javafx.application.Platform.runLater(this::updateWinsP1);
+                        }
+                        case StatusMessage.UPDATE_WIN_COUNTER_2 -> {
+                            System.out.println("Updating the wins.");
+                            javafx.application.Platform.runLater(this::updateWinsP2);
+                        }
                     }
                 }
                 else if (m.getType().equals("MOVE")) {
@@ -286,6 +339,17 @@ public class Online_game {
         try {
             if (index >= 0 && index <= 9) {
                 toServer.writeObject(new MoveMessage(index));
+
+                if (player == 1){
+                    indicatorStateP2();
+                    sendMove(70);
+                }else {
+                    indicatorStateP1();
+                    sendMove(60);
+                }
+
+                sendMove(50);
+
                 System.out.println("Sent Move to Server");
                 System.out.println("Selected: " + index);
             } else if (index == 10){
@@ -304,6 +368,26 @@ public class Online_game {
                 toServer.writeObject(new StatusMessage(StatusMessage.RESTART, game.getBoard()));
                 System.out.println("Sent Restart to Server");
                 System.out.println("Game is Reset!" + index);
+            } else if (index == 50){
+                toServer.writeObject(new StatusMessage(StatusMessage.UPDATE_COUNTER, game.getBoard()));
+                System.out.println("Sent Update Counter to Server");
+                System.out.println("Updated Counter!" + index);
+            } else if (index == 60){
+                toServer.writeObject(new StatusMessage(StatusMessage.CHANGE_TURN_1, game.getBoard()));
+                System.out.println("Sent Change Turn to Server");
+                System.out.println("Updated Player(playing) Turn!" + index);
+            } else if (index == 70){
+                toServer.writeObject(new StatusMessage(StatusMessage.CHANGE_TURN_2, game.getBoard()));
+                System.out.println("Sent Change Turn to Server");
+                System.out.println("Updated Player(playing) Turn!" + index);
+            } else if (index == 80){
+                toServer.writeObject(new StatusMessage(StatusMessage.UPDATE_WIN_COUNTER_1, game.getBoard()));
+                System.out.println("Sent Update Wins to Server");
+                System.out.println("Updated opponent's wins!" + index);
+            } else if (index == 90){
+                toServer.writeObject(new StatusMessage(StatusMessage.UPDATE_WIN_COUNTER_2, game.getBoard()));
+                System.out.println("Sent Update Wins to Server");
+                System.out.println("Updated opponent's wins!" + index);
             }
         } catch (Exception ex) {
             javafx.application.Platform.runLater(() ->
@@ -326,6 +410,7 @@ public class Online_game {
         javafx.application.Platform.runLater(() ->
                 boardArray[pos].setText(player == 2 ? "X" : "O" )
         );
+        sendMove(99);
         game.setPos(pos, player == 2 ? 1 : 2);
         System.out.println("Set position: " + pos);
         System.out.println("For Player: " + player);
