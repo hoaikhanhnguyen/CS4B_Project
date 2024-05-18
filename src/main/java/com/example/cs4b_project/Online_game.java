@@ -75,12 +75,8 @@ public class Online_game {
             boardArray[j].setText("");              // this allows for an isEmpty() check
             boardArray[j].setDisable(false);
         }
-
+        disabledButtons.clear();
         game.reset();
-        playerOneWins = 0;
-        playerTwoWins = 0;
-        playerOneWinCount.setText("0");
-        playerTwoWinCount.setText("0");
         turnCount.setText("0");
         game.dumpBoard();
     }
