@@ -75,6 +75,10 @@ public class Online_game {
         }
 
         game.reset();
+        playerOneWins = 0;
+        playerTwoWins = 0;
+        playerOneWinCount.setText("0");
+        playerTwoWinCount.setText("0");
         turnCount.setText("0");
         game.dumpBoard();
     }
@@ -410,7 +414,6 @@ public class Online_game {
         javafx.application.Platform.runLater(() ->
                 boardArray[pos].setText(player == 2 ? "X" : "O" )
         );
-        sendMove(99);
         game.setPos(pos, player == 2 ? 1 : 2);
         System.out.println("Set position: " + pos);
         System.out.println("For Player: " + player);
