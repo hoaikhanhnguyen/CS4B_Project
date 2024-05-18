@@ -40,6 +40,8 @@ public class Online_game {
     @FXML
     public Button[] boardArray;
 
+    private ArrayList<Integer> disabledButtons;
+
     public Game game;
     public int playerOneWins = 0;
     public int playerTwoWins = 0;
@@ -107,10 +109,6 @@ public class Online_game {
         }
     }
 
-    public void disableTile(int moved){
-        boardArray[moved].setDisable(true);
-    }
-
     public void updateWinsP1(){
         playerOneWins++;
         playerOneWinCount.setText(Integer.toString(playerOneWins));
@@ -154,6 +152,7 @@ public class Online_game {
             throw new RuntimeException(ex);
         }
 
+        disabledButtons = new ArrayList<Integer>();
         boardArray =
                 new Button[]{button1, button2, button3,
                         button4, button5, button6,
@@ -171,7 +170,6 @@ public class Online_game {
                 String textColor = textColors[player == 1 ? 0 : 1];
                 boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
                 boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
-                //boardArray[buttonPos].setDisable(true);
                 disableAllButtons();
                 sendMove(buttonPos);
 
@@ -327,9 +325,17 @@ public class Online_game {
     }
 
     private void enableAllButtons() {
+        Boolean skip = false;
         for (int i = 0 ; i < 9 ; i++) {
-            int buttonPos = i;
-            boardArray[buttonPos].setDisable(false);
+            for(int z = 0; z < disabledButtons.size() ; z++) {
+                if(disabledButtons.get(z) == i)
+                    skip = true;
+            }
+            if(skip == false) {
+                int buttonPos = i;
+                boardArray[buttonPos].setDisable(false);
+            }
+            skip = false;
         }
     }
 
@@ -401,7 +407,7 @@ public class Online_game {
     }
 
     private void disableButtons() {
-        System.out.println("Enabling Buttons");
+        System.out.println("Disabling Buttons");
         System.out.println(Arrays.toString(game.getBoard()));
         for (int i = 0 ; i < 9 ; i++) {
             if (game.getBoard()[i] != 0) {
@@ -414,6 +420,7 @@ public class Online_game {
         javafx.application.Platform.runLater(() ->
                 boardArray[pos].setText(player == 2 ? "X" : "O" )
         );
+        disabledButtons.add(pos);
         game.setPos(pos, player == 2 ? 1 : 2);
         System.out.println("Set position: " + pos);
         System.out.println("For Player: " + player);
