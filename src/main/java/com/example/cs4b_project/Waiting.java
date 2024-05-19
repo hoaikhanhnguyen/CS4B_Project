@@ -1,9 +1,12 @@
 package com.example.cs4b_project;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.io.*;
@@ -33,6 +36,15 @@ public class Waiting {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("online_game.fxml"));
         fxmlLoader.setController(new Online_game());
         Scene scene = new Scene(fxmlLoader.load());
+        stage.setOnCloseRequest(windowEvent -> {
+            System.out.println("closed the program from board");
+            try{
+                Platform.exit();
+                System.exit(0);
+            }catch (Exception e1){
+                e1.printStackTrace();
+            }
+        });
         stage.setScene(scene);
     }
 

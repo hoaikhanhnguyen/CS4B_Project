@@ -1,6 +1,7 @@
 package com.example.cs4b_project;
 
 import com.example.cs4b_project.Messages.*;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -10,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.*;
 import java.net.Socket;
@@ -292,6 +292,22 @@ public class Online_game {
                     updateBoard(move.pos);
                     disableButtons();
                 }
+                else if(m.getType().equals("ERROR")){
+                    System.out.println("ERR: TRYING TO OPEN ERROR SCREEN");
+                    javafx.application.Platform.runLater(this::displayError);
+                    disableAllButtons();
+                    ErrorMessage w = (ErrorMessage) m;
+                    player = w.getPlayer();
+                    if (player == ErrorMessage.PLAYER_1) {
+                        javafx.application.Platform.runLater(() ->
+                                systemMsg.setText("Player 2 disconnected")
+                        );
+                    } else if (player == ErrorMessage.PLAYER_2) {
+                        javafx.application.Platform.runLater(() ->
+                                systemMsg.setText("Player 1 disconnected")
+                        );
+                    }
+                }
                 else {
                     // Type of message is unknown - convert to string.
                     String text = message.toString();
@@ -429,6 +445,15 @@ public class Online_game {
             // Load stage onto scene
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();
+            stage.setOnCloseRequest(windowEvent -> {
+                System.out.println("closing the program from win-screen");
+                try{
+                    Platform.exit();
+                    System.exit(0);
+                }catch (Exception e1){
+                    e1.printStackTrace();
+                }
+            });
             stage.setScene(scene);
 
             // Set up WinMenu controller with proper winner
@@ -442,6 +467,18 @@ public class Online_game {
             stage.showAndWait();
         } catch (IOException e) {
             System.out.println("There was an error opening the win screen.");
+        }
+    }
+
+    private void displayError() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("error_status.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e){
+            System.out.println("THERE WAS AN ERROR WITH THE ERROR SCREEN");
         }
     }
 

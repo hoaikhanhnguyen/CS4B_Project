@@ -4,6 +4,7 @@
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.Waiting">
    <children>
@@ -17,11 +18,17 @@
          <effect>
             <DropShadow />
          </effect>
+         <font>
+            <Font name="Less Perfect DOS VGA" size="23.0" />
+         </font>
       </Button>
       <Button fx:id="joinB" layoutX="172.0" layoutY="194.0" mnemonicParsing="false" onAction="#openBoard" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Join Game">
          <effect>
             <DropShadow />
          </effect>
+         <font>
+            <Font name="Less Perfect DOS VGA" size="23.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

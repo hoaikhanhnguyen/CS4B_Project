@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.ErrorStatus">
+   <children>
+      <Label layoutX="19.0" layoutY="95.0" prefHeight="105.0" prefWidth="562.0" text="ERROR: CLIENT CONNECTION" underline="true">
+         <font>
+            <Font name="Less Perfect DOS VGA" size="46.0" />
+         </font>
+      </Label>
+      <Button fx:id="errorExit" layoutX="198.0" layoutY="268.0" mnemonicParsing="false" prefHeight="56.0" prefWidth="209.0" stylesheets="@stylesheet.css" text="EXIT">
+         <font>
+            <Font name="Less Perfect DOS VGA" size="30.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

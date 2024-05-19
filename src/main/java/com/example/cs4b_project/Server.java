@@ -1,6 +1,10 @@
 package com.example.cs4b_project;
 
 import com.example.cs4b_project.Messages.*;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -155,6 +159,23 @@ public class Server {
                         }
                     }
                 } catch (Exception e) {
+
+                    if(client == currentSession.client1) {
+                        System.out.println("ERROR: PLAYER 1 DISCONNECTED");
+                        try {
+                            streams.get(1).writeObject(new ErrorMessage(1));
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    } else{
+                        System.out.println("ERROR: PLAYER 2 DISCONNECTED");
+                        try {
+                            streams.get(0).writeObject(new ErrorMessage(2));
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
                     System.out.println("Error with client connection: " + e.getMessage());
                     e.printStackTrace();
                 }
