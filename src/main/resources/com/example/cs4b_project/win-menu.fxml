@@ -25,11 +25,17 @@
          <effect>
             <DropShadow />
          </effect>
+         <font>
+            <Font name="Less Perfect DOS VGA" size="23.0" />
+         </font>
       </Button>
       <Button fx:id="exitB" layoutX="273.0" layoutY="211.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Exit">
          <effect>
             <DropShadow />
          </effect>
+         <font>
+            <Font name="Less Perfect DOS VGA" size="23.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

@@ -47,6 +47,14 @@ public class Waiting {
         });
         stage.setScene(scene);
     }
+    public void open1Player() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("gameboard.fxml"));
+        fxmlLoader.setController(new AI_Gameboard());
+        Scene scene = new Scene(fxmlLoader.load());
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
+    }
 
     public void openGameList() throws IOException {
         Stage stage = (Stage) joinB.getScene().getWindow();
