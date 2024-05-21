@@ -167,6 +167,7 @@ public class Online_game {
                 boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
                 boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
                 disableAllButtons();
+                disabledButtons.add(buttonPos);
                 sendMove(buttonPos);
 
                 // Set Internal Board
@@ -432,6 +433,8 @@ public class Online_game {
         javafx.application.Platform.runLater(() ->
                 boardArray[pos].setText(player == 2 ? "X" : "O" )
         );
+        boardArray[pos].setStyle(player == 2 ?  "-fx-text-fill: #0831e7;" + "-fx-font-size: 28px;"
+                                             : "-fx-text-fill: #d40505;" + "-fx-font-size: 28px;");
         disabledButtons.add(pos);
         game.setPos(pos, player == 2 ? 1 : 2);
         System.out.println("Set position: " + pos);
