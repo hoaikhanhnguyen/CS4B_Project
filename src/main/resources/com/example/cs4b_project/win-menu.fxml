@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.WinMenu">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="315.0" prefWidth="516.0" style="-fx-background-color: #263F73;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="winnerLabel" alignment="CENTER" layoutX="28.0" layoutY="66.0" prefHeight="121.0" prefWidth="461.0" text="Player 1 Is the Winner!" textFill="#ebebeb">
          <font>
@@ -25,11 +25,17 @@
          <effect>
             <DropShadow />
          </effect>
+         <font>
+            <Font name="Less Perfect DOS VGA" size="23.0" />
+         </font>
       </Button>
       <Button fx:id="exitB" layoutX="273.0" layoutY="211.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="34.0" prefWidth="172.0" stylesheets="@stylesheet.css" text="Exit">
          <effect>
             <DropShadow />
          </effect>
+         <font>
+            <Font name="Less Perfect DOS VGA" size="23.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

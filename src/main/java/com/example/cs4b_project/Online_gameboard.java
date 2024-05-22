@@ -13,7 +13,7 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
-public class Gameboard {
+public class Online_gameboard {
 
     @FXML
     public Button button1, button2, button3, button4, button5, button6, button7, button8, button9, buttonNewGame;
@@ -31,9 +31,9 @@ public class Gameboard {
 
     public void initialize() {
         boardArray =
-            new Button[]{button1, button2, button3,
-                         button4, button5, button6,
-                         button7, button8, button9};
+                new Button[]{button1, button2, button3,
+                        button4, button5, button6,
+                        button7, button8, button9};
         game = new Game();
 
         // Set Initial Player Turn Indicator
@@ -44,10 +44,10 @@ public class Gameboard {
         for (int i = 0 ; i < 9 ; i++) {
             int buttonPos = i;
             boardArray[i].setOnAction((ActionEvent a) -> {
-                  String textColor = textColors[player == 1 ? 0 : 1];
-                  boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
-                  boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
-                  boardArray[buttonPos].setDisable(true);
+                String textColor = textColors[player == 1 ? 0 : 1];
+                boardArray[buttonPos].setText(player == 1 ? "X" : "O" );
+                boardArray[buttonPos].setStyle(textColor + "-fx-font-size: 28px;");
+                boardArray[buttonPos].setDisable(true);
 
                 // Set Internal Board
                 game.setPos(buttonPos, player);
@@ -62,7 +62,7 @@ public class Gameboard {
                 updatePlayerTurnInd(player);
 
                 if (game.isComplete() == 1) {
-                        gameWon(1);
+                    gameWon(1);
                 } else if (game.isComplete() == 2) {
                     gameWon(2);
                 } else if (game.isComplete() == 3) {
@@ -96,7 +96,6 @@ public class Gameboard {
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("win-menu.fxml"));
-            fxmlLoader.setController(new WinMenu());
             // Load stage onto scene
             Scene scene = new Scene(fxmlLoader.load());
             Stage stage = new Stage();

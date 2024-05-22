@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cs4b_project.gamelist">
+   <children>
+      <VBox fx:id="containerV" layoutX="12.0" layoutY="63.0" prefHeight="328.0" prefWidth="583.0" />
+      <ToolBar layoutX="10.0" layoutY="14.0" prefHeight="40.0" prefWidth="583.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="150.0" prefHeight="30.0" prefWidth="322.0">
+               <children>
+                  <Label layoutY="-1.0" prefHeight="31.0" prefWidth="170.0" text="SERVER LISTING" underline="true">
+                     <font>
+                        <Font name="Less Perfect DOS VGA" size="21.0" />
+                     </font></Label>
+               </children>
+            </AnchorPane>
+        </items>
+      </ToolBar>
+      <Button fx:id="exitB" layoutX="501.0" layoutY="7.0" onAction="#closeWindow" mnemonicParsing="false" prefHeight="30.0" prefWidth="91.0" stylesheets="@stylesheet.css" text="exit">
+         <font>
+            <Font name="Less Perfect DOS VGA" size="22.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
